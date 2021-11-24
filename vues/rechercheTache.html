@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8"/>
+<title>To_Do_Creation_Tache</title>
+<link href="to_do.css" rel="stylesheet" media="screen" type="text/css">
+</head>
+
+<body>
+<header>
+<div class="tete">
+<h1 class="titre">What To Do ?</h1>
+</div>
+<nav class="le_menu">
+<ul>
+<li class="menu"> <a href="accueil.php">Accueil</a> </li>
+<li class="menu"> <a href="seconnecter.html">Se connecter</a> </li>
+<li class="menu"> <a href="nouvelleTache.html">Cr&eacute;er une t&acirc;che</a></li>
+<li class="menu"> <a href="rechercheTache.html">Rechercher une t&acirc;che</a></li>
+</ul>
+</nav>
+</header>
+<div class="ventre">
+
+<h2 class="petit_titre">Rechercher une t&acirc;che</h2>
+
+<form action="findById.php" method="GET">
+<p>
+<label for="identifiant"> Id de la t&acirc;che :</label> 
+<input type="text" id="identifiant" name="identifiant">
+</p>
+<input type="submit" value="Valider" />
+</form>
+</div>
+</body>
+
+<footer>
+<div class="pied">
+<p class="iep">Sophia Solignac - Lou Labussiere <br/>Groupe 8</p>
+</div>
+</footer>
+</html>

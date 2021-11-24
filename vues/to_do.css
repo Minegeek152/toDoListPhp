@@ -1,0 +1,63 @@
+body{background-color:#E6E6FA;}
+
+/*haut de page*/
+header{
+	background-color:#371473;
+}
+div.tete{
+	display: flex;
+	justify-content : center;
+}
+
+h1.titre{
+	color:white;
+}
+
+nav.le_menu ul li{
+display:inline-block;
+}
+
+li.menu:hover{
+font-size:13px;
+}
+
+.le_menu{
+	display:flex;
+	justify-content:center;
+}
+
+li.menu{
+	padding:3px 3px 3px 3px;
+	border-radius:4px;
+	font-size:15px;
+	background:#E6E6FA;
+	box-shadow:3px 3px 2px black;
+}
+
+/*partie central de la page*/
+div.ventre{
+	background-color: white
+}
+
+h2.petit_titre{
+	display: flex;
+	justify-content : center;
+	color:#371473
+}
+
+/*bas de page*/
+div.pied{
+	color:white;
+	background-color:#371473;
+	display: flex;
+	justify-content : center;
+	align-self: flex-end;
+	display:flex;
+}
+
+p.iep{
+	text-align: center;
+}
+
+
+
