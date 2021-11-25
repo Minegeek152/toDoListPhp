@@ -16,8 +16,11 @@
 <ul>
 <li class="menu"> <a href="accueil.php">Accueil</a> </li>
 <li class="menu"> <a href="seconnecter.html">Se connecter</a> </li>
-<li class="menu"> <a href="nouvelleTache.html">Cr&eacute;er une t&acirc;che</a></li>
-<li class="menu"> <a href="rechercheTache.html">Rechercher une t&acirc;che</a></li>
+<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste publique</a></li>
+<li class="menu"> <a href="rechercheTache.html">Rechercher une liste</a></li>
+<ul class="connecte">
+<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
+</ul>
 </ul>
 </nav>
 </header>
@@ -25,14 +28,14 @@
 
 <h2 class="petit_titre">Connexion</h2>
 
-<form action="logIn.php" method="GET">
+<form action="../valider/validerConnexion.php" method="GET">
 <p>
 <label for="login"> Login * :</label> 
 <input type="text" id="login" name="login" required />
 </p>
 <p>
 <label for="mdp"> Mot de passe * :</label> 
-<input type="text" id="mdp" name="mdp" required />
+<input type="password" id="mdp" name="mdp" required />
 </p>
 <input type="submit" value="Valider"/>
 </form>

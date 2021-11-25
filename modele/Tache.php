@@ -1,13 +1,15 @@
 <?php
 class Tache {
 	private $intitule;
-	private $identifiant;
+	private $idTache;
 	private $complete;
+	private $idListe;
 	
-	public function __construct (string $tache, int $compl, int $id){
+	public function __construct (string $tache, int $compl, int $id, int $idLi){
 		$this->intitule = $tache;	
 		$this->complete = $compl;
-		$this->identifiant = $id;
+		$this->idTache = $id;
+		$this->idListe = $idLi;
 	}
 	
 	public function __toString() : string {

@@ -1,8 +1,8 @@
-body{background-color:#E6E6FA;}
+body{background-color:#3A3A3A;}
 
 /*haut de page*/
 header{
-	background-color:#371473;
+	background-color:#724278;
 }
 div.tete{
 	display: flex;
@@ -28,34 +28,55 @@ font-size:13px;
 
 li.menu{
 	padding:3px 3px 3px 3px;
-	border-radius:4px;
 	font-size:15px;
-	background:#E6E6FA;
+	background:#FFFFFF;
 	box-shadow:3px 3px 2px black;
 }
 
+ul.connecte{
+	padding:3px 3px 3px 3px;
+	font-size:15px;
+	background:#FFFFFF;
+	box-shadow:3px 3px 2px black;
+	display : none;
+}
 /*partie central de la page*/
 div.ventre{
 	background-color: white
 }
 
 h2.petit_titre{
+	margin-top: 10px; 
 	display: flex;
 	justify-content : center;
-	color:#371473
+	color:#724278;
 }
 
+div#modif{
+	display: flex;
+	justify-content : flex-start;
+}
+
+div#supp{
+	display: flex;
+	justify-content : flex-end;
+}
+
+div#gauche{
+	display:flex;
+	justify-content:flex-end;
+}
 /*bas de page*/
 div.pied{
+	margin-top: 10px;
 	color:white;
-	background-color:#371473;
+	background-color:#724278;
 	display: flex;
 	justify-content : center;
 	align-self: flex-end;
-	display:flex;
 }
 
-p.iep{
+h3.iep{
 	text-align: center;
 }
 

@@ -14,27 +14,34 @@
 </div>
 <nav class="le_menu">
 <ul>
-<li class="menu"> <a href="acceuil.php">Acceuil</a> </li>
+<li class="menu"> <a href="accueil.php">Accueil</a> </li>
 <li class="menu"> <a href="seconnecter.html">Se connecter</a> </li>
-<li class="menu"> <a href="nouvelleTache.html">Creer une tache</a></li>
-<li class="menu"> <a href="rechercheTache.html">Rechercher une tache</a></li>
+<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste publique</a></li>
+<li class="menu"> <a href="rechercheTache.html">Rechercher une liste</a></li>
+<ul class="connecte">
+<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
+</ul>
 </ul>
 </nav>
 </header>
 <div class="ventre">
 
-<h2 class="petit_titre">Listes des taches</h2>
+<h2 class="petit_titre">Listes de t&acirc;ches</h2>
 
 
 
 <?php
 require('../modele/Connection.php');
 require('../utils.php');
+require("../modele/Tache.php");
 require("../gateway/TacheGateWay.php");
 
+
 try{
-$tgw = new TacheGateWay(new Connection($dsn, $user,$pass));
-$tgw->showTaches();
+$tgw = new TacheGateWay(new Connection($dns, $user,$pass));
+$taches = $tgw->showTaches();
+foreach($taches as $i => $row)
+	echo $taches[$i].'<br/>';
 }
 catch( PDOException $Exception ) {
 echo 'erreur';

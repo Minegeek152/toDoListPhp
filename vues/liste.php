@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8"/>
-<title>To_Do_Nouveau_Compte</title>
+<title>To_Do_Liste</title>
 <link href="to_do.css" rel="stylesheet" media="screen" type="text/css">
 </head>
 
@@ -26,25 +26,39 @@
 </header>
 <div class="ventre">
 
-<h2 class="petit_titre">Inscription</h2>
+<h2 class="petit_titre">Nom de la liste
+<?php 
+//on recupere le nom de la liste selectionnée et on l'affiche dans le titre
+?>
+</h2>
 
-<form action="../valider/validerNouveauCompte.php" method="GET">
-<p>
-<label for="login_iscrp"> Login * :</label> 
-<input type="text" id="login_iscrp" name="login_iscrp" required />
-</p>
-<p>
-<label for="email"> Adresse e-mail * :</label> 
-<input type="text" id="email" name="email" required />
-</p>
-<p>
-<label for="mdp_iscrp"> Mot de passe * :</label> 
-<input type="text" id="mdp_iscrp" name="mdp_iscrp" required />
-</p>
-<input type="submit" value="Valider"/>
+<div id="modif">
+<form  action="../validerListe.php" method="GET">
+<input type="text" id="nom" name="nom" required />
+<input type="submit" value="Modifier le nom de la liste" />
 </form>
+</div>
+<div id="supp">
+<button type="button">Supprimer la liste</button>
+</div>
 
+<div id="les_taches">
+<?php
+//on recupere les taches de la liste sélectionnée et on les affiches
+?>
+</div>
 
+<div id="gauche">
+<aside>
+<form class="gerer" action="../valider/validerTache.php" method="GET">
+<p>
+<label for="intitule">Ajouter une t&acirc;che : </label> 
+<input type="text" id="intitule" name="intitule" required />
+</p>
+<input type="submit" value="Ajouter" />
+</form>
+</aside>
+</div>
 </div>
 </body>
 

@@ -12,7 +12,9 @@ $tache = $tgw->findById($id);
 echo $tache; /* regler ce probleme*/
 }
 catch( PDOException $Exception ) {
-echo 'erreur';
-echo $Exception->getMessage();
+	/*echo 'erreur';
+	echo $Exception->getMessage();*/
+	header('Location : http://berlin.iut.local/~lolabussie/toDoListPhp/vues/erreur.php');
+	exit;
 }
 ?>

@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8"/>
-<title>To_Do_Creation_Tache</title>
+<title>To_Do_Recherche_Tache</title>
 <link href="to_do.css" rel="stylesheet" media="screen" type="text/css">
 </head>
 
@@ -16,8 +16,11 @@
 <ul>
 <li class="menu"> <a href="accueil.php">Accueil</a> </li>
 <li class="menu"> <a href="seconnecter.html">Se connecter</a> </li>
-<li class="menu"> <a href="nouvelleTache.html">Cr&eacute;er une t&acirc;che</a></li>
-<li class="menu"> <a href="rechercheTache.html">Rechercher une t&acirc;che</a></li>
+<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste publique</a></li>
+<li class="menu"> <a href="rechercheTache.html">Rechercher une liste</a></li>
+<ul class="connecte">
+<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
+</ul>
 </ul>
 </nav>
 </header>
@@ -25,10 +28,10 @@
 
 <h2 class="petit_titre">Rechercher une t&acirc;che</h2>
 
-<form action="findById.php" method="GET">
+<form action="../test/findById.php" method="GET">
 <p>
 <label for="identifiant"> Id de la t&acirc;che :</label> 
-<input type="text" id="identifiant" name="identifiant">
+<input type="text" id="identifiant" name="identifiant" required />
 </p>
 <input type="submit" value="Valider" />
 </form>

@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8"/>
-<title>To_Do_Nouveau_Compte</title>
+<title>To_Do_Erreur</title>
 <link href="to_do.css" rel="stylesheet" media="screen" type="text/css">
 </head>
 
@@ -26,23 +26,16 @@
 </header>
 <div class="ventre">
 
-<h2 class="petit_titre">Inscription</h2>
+<h2 class="petit_titre">Erreur :(</h2>
 
-<form action="../valider/validerNouveauCompte.php" method="GET">
-<p>
-<label for="login_iscrp"> Login * :</label> 
-<input type="text" id="login_iscrp" name="login_iscrp" required />
-</p>
-<p>
-<label for="email"> Adresse e-mail * :</label> 
-<input type="text" id="email" name="email" required />
-</p>
-<p>
-<label for="mdp_iscrp"> Mot de passe * :</label> 
-<input type="text" id="mdp_iscrp" name="mdp_iscrp" required />
-</p>
-<input type="submit" value="Valider"/>
-</form>
+<?php
+
+if(!isset($_GET['message'])){
+	echo = "erreur, aucun message à afficher"
+} else $message = $_GET['message'];
+
+echo $message;
+?>
 
 
 </div>
