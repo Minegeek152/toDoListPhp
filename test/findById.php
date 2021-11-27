@@ -1,8 +1,8 @@
 <?php
-require('../modele/Connection.php');
+require('../classes/Connection.php');
 require('../utils.php');
 require("../gateway/TacheGateWay.php");
-require("../modele/Tache.php");
+require("../classes/Tache.php");
 
 $id = $_GET['identifiant'];
 

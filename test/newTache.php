@@ -1,7 +1,7 @@
 <?php
-require('../modele/Connection.php');
+require('../classes/Connection.php');
 require('../utils.php');
-require("../modele/Tache.php");
+require("../classes/Tache.php");
 require("../gateway/TacheGateWay.php");
 
 $intitule = $_GET['intitule'];

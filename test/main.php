@@ -14,10 +14,10 @@
 </form>
 
 <?php  
-require("../modele/Connection.php");
+require("../classes/Connection.php");
 require("../utils.php");
 require("../gateway/UtilisateurGateway.php");
-require("../modele/Utilisateur.php");
+require("../classes/Utilisateur.php");
 
 $connect=new Connection($dns,$user,$pass);
 $user=new Utilisateur($_POST['name'],$_POST['mdp']);
