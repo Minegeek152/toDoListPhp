@@ -42,6 +42,7 @@ ul.connecte{
 }
 /*partie central de la page*/
 div.ventre{
+	min-height: 250px;
 	background-color: white
 }
 
@@ -62,9 +63,14 @@ div#supp{
 	justify-content : flex-end;
 }
 
-div#gauche{
+div#les_taches{
 	display:flex;
-	justify-content:flex-end;
+	justify-content:center;
+}
+
+div#nouv_tache{
+	display:flex;
+	justify-content:center;
 }
 /*bas de page*/
 div.pied{

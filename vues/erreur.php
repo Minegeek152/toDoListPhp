@@ -30,11 +30,6 @@
 
 <?php
 
-if(!isset($_GET['message'])){
-	echo = "erreur, aucun message à afficher"
-} else $message = $_GET['message'];
-
-echo $message;
 ?>
 
 

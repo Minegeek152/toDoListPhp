@@ -14,10 +14,10 @@
 </div>
 <nav class="le_menu">
 <ul>
-<li class="menu"> <a href="accueil.php">Accueil</a> </li>
+<li class="menu"> <a href="accueil.html">Accueil</a> </li>
 <li class="menu"> <a href="seconnecter.html">Se connecter</a> </li>
 <li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste publique</a></li>
-<li class="menu"> <a href="rechercheTache.html">Rechercher une liste</a></li>
+<li class="menu"> <a href="rechercheListe.html">Rechercher une liste</a></li>
 <ul class="connecte">
 <li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
 </ul>
@@ -26,14 +26,10 @@
 </header>
 <div class="ventre">
 
-<h2 class="petit_titre">Nom de la liste
-<?php 
-//on recupere le nom de la liste selectionnée et on l'affiche dans le titre
-?>
-</h2>
+<h2 class="petit_titre">Nom de la liste</h2>
 
 <div id="modif">
-<form  action="../validerListe.php" method="GET">
+<form  action="" method="post">
 <input type="text" id="nom" name="nom" required />
 <input type="submit" value="Modifier le nom de la liste" />
 </form>
@@ -43,14 +39,17 @@
 </div>
 
 <div id="les_taches">
-<?php
-//on recupere les taches de la liste sélectionnée et on les affiches
-?>
+<ul>
+<li>tache 1</li>
+<li>tache 2</li>
+<li>tache 3</li>
+<li>tache 4</li>
+</ul>
 </div>
 
-<div id="gauche">
+<div id="nouv_tache">
 <aside>
-<form class="gerer" action="../valider/validerTache.php" method="GET">
+<form class="gerer" action="" method="post">
 <p>
 <label for="intitule">Ajouter une t&acirc;che : </label> 
 <input type="text" id="intitule" name="intitule" required />
@@ -59,6 +58,7 @@
 </form>
 </aside>
 </div>
+
 </div>
 </body>
 

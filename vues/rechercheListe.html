@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8"/>
-<title>To_Do_Nouvelle_Tache</title>
+<title>To_Do_Recherche_Tache</title>
 <link href="to_do.css" rel="stylesheet" media="screen" type="text/css">
 </head>
 
@@ -14,10 +14,10 @@
 </div>
 <nav class="le_menu">
 <ul>
-<li class="menu"> <a href="accueil.php">Accueil</a> </li>
+<li class="menu"> <a href="accueil.html">Accueil</a> </li>
 <li class="menu"> <a href="seconnecter.html">Se connecter</a> </li>
 <li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste publique</a></li>
-<li class="menu"> <a href="rechercheTache.html">Rechercher une liste</a></li>
+<li class="menu"> <a href="rechercheListe.html">Rechercher une liste</a></li>
 <ul class="connecte">
 <li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
 </ul>
@@ -26,22 +26,21 @@
 </header>
 <div class="ventre">
 
-<h2 class="petit_titre">Cr&eacute;er une t&acirc;che</h2>
+<h2 class="petit_titre">Rechercher une liste</h2>
 
-<form action="../valider/validerTache.php" method="GET">
+<form action="" method="post">
 <p>
-<label for="intitule"> Intitule de la t&acirc;che :</label> 
-<input type="text" id="intitule" name="intitule" required />
+<label for="nom_rech"> Nom de la liste :</label> 
+<input type="text" id="identifiant" name="identifiant" required />
 </p>
 <input type="submit" value="Valider" />
 </form>
-
 </div>
 </body>
 
 <footer>
 <div class="pied">
-<p class="iep">Sophia Solignac - Lou Labussiere<br/>Groupe 8</p>
+<p class="iep">Sophia Solignac - Lou Labussiere <br/>Groupe 8</p>
 </div>
 </footer>
 </html>
