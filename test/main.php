@@ -1,7 +1,7 @@
 <form action="" method="post">
   <div >
     <label for="name">Enter your name: </label>
-    <input type="password" name="name" id="name" required>
+    <input type="text" name="name" id="name" required>
   </div>
   <div >
     <label for="name">Enter your password : </label>
@@ -20,8 +20,15 @@ require("../gateway/UtilisateurGateway.php");
 require("../classes/Utilisateur.php");
 
 $connect=new Connection($dns,$user,$pass);
-$user=new Utilisateur($_POST['name'],$_POST['mdp']);
+
 $userGateway=new UtilisateurGateway($connect);
-$userGateway->insert($user);
+
+if (isset($_POST['name'],$_POST['mdp'])){
+    $user=new Utilisateur($_POST['name'],$_POST['mdp']);
+    $userGateway->insert($user);
+    
+}
+
+
 $userGateway->selectAll();
 ?>

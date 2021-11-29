@@ -1,6 +1,6 @@
 <?php 
 
-class Utilisateur
+class Membre
 {
  	private $pseudo;
  	private $mdp;
@@ -9,7 +9,7 @@ class Utilisateur
  	function __construct(string $pseudo,string $mdp)
  	{
  		$this->pseudo=$pseudo;
- 		$this->mdp=$mdp
+ 		$this->mdp=password_hash($mdp,PASSWORD_DEFAULT);
  	}
 
  	function __toString(){
@@ -29,7 +29,7 @@ class Utilisateur
     }
 
     function setMdp(string $mdp){
-        $this->mdp=$mdp
+        $this->mdp=password_hash($mdp,PASSWORD_DEFAULT);
     }
  } 
 

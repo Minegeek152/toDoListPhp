@@ -15,7 +15,7 @@ class UtilisateurGateway{
 
 	public function insert(Utilisateur $user){
 		$pseudo=$user->getPseudo();
-		$mdp=$user->getMdp();
+		$mdp=password_hash($user->getMdp(), PASSWORD_DEFAULT);
 		$query='INSERT into Membre value(NULL,:name,:mdp)';
 
 		try{
@@ -33,10 +33,13 @@ class UtilisateurGateway{
 
 		try{
 			$this->con->executeQuery($query,array());
-			$ab=$this->con->getResults();
-			foreach ($ab as $row) {
-				echo 'Id :'.$row['idMembre'].'    Pseudo : '.$row['pseudo'].'     Mdp : '.$row['mdp'].'<br/>';
-			}
+			
+
+			$results = $this->con->getResults();
+
+			foreach ($results as $row)
+				$Membres[] = new Utilisateur($row['pseudo'],$row['mdp']);
+			return $Membres;
 
 		}catch(PDOexception $e){
 			echo $e->getMessage();

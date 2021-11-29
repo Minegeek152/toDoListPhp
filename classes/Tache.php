@@ -5,7 +5,7 @@ class Tache {
 	private $complete;
 	private $idListe;
 	
-	public function __construct (string $tache, int $compl, int $id, int $idLi){
+	public function __construct (string $tache,int $idLi, bool $compl=false, int $id=NULL) {
 		$this->intitule = $tache;	
 		$this->complete = $compl;
 		$this->idTache = $id;
@@ -14,6 +14,29 @@ class Tache {
 	
 	public function __toString() : string {
 		return $this->intitule;	
+	}
+
+	function getIntitule():string{
+		return $this->intitule;
+	}
+
+	function isComplete():bool{
+		return $this->complete;
+	}
+	function getIdTache(){
+		return $this->idTache;
+	}
+
+	function getIdListe():int{
+		return $this->idListe;
+	}
+
+	function setIntitule(string $intitule){
+		$this->intitule=$intitule;
+	}
+
+	function toggleComplete(){
+		$this->complete=!$this->complete;
 	}
 }
 ?>
