@@ -8,41 +8,64 @@ class MembreGateway{
 		$this->con=$con;
 	}
 
+	public function findById(int $id) : Membre {
+		$query = "SELECT * FROM Membre WHERE idMembre = :id";
+		$this->con->executeQuery($query,array(':id'=>array($id,PDO::PARAM_INT)));
+		
+		$results = $this->con->getResults();
+		foreach ($results as $row)
+			$found_membre = new Membre($row['pseudo'],$row['mdp'],$row['idMembre']);
+		return $found_membre;
+	}
+	
 
-
-	public function newwMember(Membre $user){
+	public function newMembre(Membre $user){
 		$pseudo=$user->getPseudo();
 		$mdp=password_hash($user->getMdp(), PASSWORD_DEFAULT);
 		$query='INSERT into Membre value(NULL,:name,:mdp)';
 
-		try{
-			$this->con->executeQuery($query,array(
-				':name' => array($pseudo,PDO::PARAM_STR), 
-				':mdp' => array($mdp,PDO::PARAM_STR)));
-		}
-		catch(PDOException $e){
-			echo $e->getMessage();
-		}
+		
+		$this->con->executeQuery($query,array(
+			':name' => array($pseudo,PDO::PARAM_STR), 
+			':mdp' => array($mdp,PDO::PARAM_STR)));
+		
 	}
 
-	public function selectAll(){
+	public function getAllMembre(){
 		$query='SELECT * from Membre';
 
-		try{
-			$this->con->executeQuery($query,array());
+
+		$this->con->executeQuery($query,array());
 			
 
-			$results = $this->con->getResults();
+		$results = $this->con->getResults();
 
-			foreach ($results as $row)
-				$Membres[] = new Member($row['pseudo'],$row['mdp']);
-			return $Membres;
+		foreach ($results as $row)
+			$Membres[] = new Membre($row['pseudo'],$row['mdp']);
+		return $Membres;
 
-		}catch(PDOexception $e){
-			echo $e->getMessage();
-		}
 
 	}
-}
 
+
+	public function updateMembrePseudo(Membre $membre){
+		
+		$idMembre=$membre->getId();
+
+		$query = "UPDATE Membre SET pseudo = :pseudo WHERE idMembre = :id";
+		$this->con->executeQuery($query,array(
+			':pseudo'=>array($pseudo,PDO::PARAM_STR),
+			':id'=>array($idMembre,PDO::PARAM_INT)));	
+	}
+
+
+	public function deleteMembre(Membre $membre){
+		$idMembre=$membre->getId();
+
+		$query = "DELETE FROM Membre WHERE idMembre = :id";
+		$this->con->executeQuery($query,array('
+			:id'=>array($idMembre,PDO::PARAM_INT)));
+	}
+
+}
 ?>

@@ -4,12 +4,13 @@ class Membre
 {
  	private $pseudo;
  	private $mdp;
+    private $id;
 
-
- 	function __construct(string $pseudo,string $mdp)
+ 	function __construct(string $pseudo,string $mdp,int $id=NULL)
  	{
  		$this->pseudo=$pseudo;
  		$this->mdp=$mdp;
+        $this->id=$id;
  	}
 
  	function __toString(){
@@ -22,6 +23,10 @@ class Membre
 
     function getMdp(){
         return $this->mdp;
+    }
+
+    function getId(){
+        return $this->id;
     }
 
     function setPseudo(string $pseudo){

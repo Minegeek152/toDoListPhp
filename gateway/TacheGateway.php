@@ -17,6 +17,26 @@ class TacheGateWay{
 		return $found_tache;
 	}
 	
+	public function newTache(Tache $task){
+
+		$intitule=$task->getIntitule();
+		$idliste=$task->getIdListe();
+		if($task->isComplete()){
+			$complete=1;
+		}
+		else{
+			$complete=0;
+		}
+		$idtache=$task->getIdTache();
+
+		$query = "INSERT INTO Tache VALUES (:intitule,:complete,:identifiant,:idliste)";
+		$this->con->executeQuery($query,array(
+			':intitule' => array($intitule,PDO::PARAM_STR), 
+			':complete' => array(0,PDO::PARAM_INT),
+			':identifiant' => array($idtache,PDO::PARAM_INT), 
+			':idliste' => array($idliste,PDO::PARAM_INT)) );		
+	}
+
 	public function getAllTaches() : array {
 		$query = "SELECT * FROM Tache";
 		try{
@@ -43,25 +63,7 @@ class TacheGateWay{
 
 	}
 	
-	public function newTache(Tache $task){
 
-		$intitule=$task->getIntitule();
-		$idliste=$task->getIdListe();
-		if($task->isComplete()){
-			$complete=1;
-		}
-		else{
-			$complete=0;
-		}
-		$idtache=$task->getIdTache();
-
-		$query = "INSERT INTO Tache VALUES (:intitule,:complete,:identifiant,:idliste)";
-		$this->con->executeQuery($query,
-	array(':intitule' => array($intitule,PDO::PARAM_STR), 
-			':complete' => array(0,PDO::PARAM_INT),
-			':identifiant' => array($idtache,PDO::PARAM_INT), 
-			':idliste' => array($idliste,PDO::PARAM_INT)) );		
-	}
 	
 	public function completeToggleTache(Tache $task){
 		if($task->isComplete()){
@@ -73,8 +75,9 @@ class TacheGateWay{
 		$idtache=$task->getIdTache();
 
 		$query = "UPDATE Tache SET complete = :complete WHERE idTache  = :id";
-		$this->con->executeQuery($query,array(':complete'=>array($complete,PDO::PARAM_INT),
-												':id'=>array($idtache,PDO::PARAM_INT)));
+		$this->con->executeQuery($query,array(
+			':complete'=>array($complete,PDO::PARAM_INT),
+			':id'=>array($idtache,PDO::PARAM_INT)));
 	}
 	
 	public function updateTache(Tache $task){
@@ -88,15 +91,17 @@ class TacheGateWay{
 		$idtache=$task->getIdTache();
 
 		$query = "UPDATE Tache SET intitule = :intitule WHERE idTache = :id";
-		$this->con->executeQuery($query,array(':intitule'=>array($intitule,PDO::PARAM_STR),
-												':id'=>array($idtache,PDO::PARAM_INT)));	
+		$this->con->executeQuery($query,array(
+			':intitule'=>array($intitule,PDO::PARAM_STR),
+			':id'=>array($idtache,PDO::PARAM_INT)));	
 	}
 	
 	public function deleteTache(Tache $task){
 		$idtache=$task->getIdTache();
 
 		$query = "DELETE FROM Tache WHERE idTache = :id";
-		$this->con->executeQuery($query,array(':id'=>array($idtache,PDO::PARAM_INT)));
+		$this->con->executeQuery($query,array('
+			:id'=>array($idtache,PDO::PARAM_INT)));
 	}
 }
 ?>

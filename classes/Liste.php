@@ -4,7 +4,7 @@ class Liste{
 	private $nom;
 	private $idMembre;
 
-	public function __construct(int $idListe,string $nom,int $idMembre){
+	public function __construct(string $nom,int $idMembre,int $idListe=NULL){
 		$this->idListe=$idListe;
 		$this->nom=$nom;
 		$this->idMembre=$idMembre;
