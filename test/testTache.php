@@ -24,17 +24,20 @@ if (isset($_POST['name'])) {
     $taskGateway->newTache($task);
 
 }
-$taches=[];
-$taches[]=$taskGateway->getAllTaches();
-foreach ($taches as $key=>$row) {
-    
-    echo $row->getIdTache();
+$taches=$taskGateway->getAllTaches();
+/*
+foreach ($taches as $row) {
+
     if($row->isComplete()){
       $complete='oui';
     }
     else{
       $complete='non';
     }
-    echo 'id tache : '.$row->getIdTache().' nom : '.$row->getIntitule().'   fait? : '.$complete.'  Dans liste : '.$row->getIdListe();
-}
+    echo 'id tache : '.$row->getIdTache().' nom : '.$row->getIntitule().'   fait? : '.$complete.'  Dans liste : '.$row->getIdListe().'<br/>';
+    
+}*/
+
+
+require("../vues/accueil.php");
 ?>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8"/>
 <title>To_Do_Acceuil</title>
-<link href="to_do.css" rel="stylesheet" media="screen" type="text/css">
+<link href= "../vues/to_do.css" rel="stylesheet" media="screen" type="text/css">
 </head>
 
 <body>
@@ -31,6 +31,20 @@
 <p>
 <a href="affichageListe.html">voir une liste</a>
 </p>
+
+<h2 class="petit_titre">
+	<?php 
+	foreach ($taches as $row) {
+
+    if($row->isComplete()){
+      $complete='oui';
+    }
+    else{
+      $complete='non';
+    }
+    echo 'id tache : '.$row->getIdTache().' nom : '.$row->getIntitule().'   fait? : '.$complete.'  Dans liste : '.$row->getIdListe().'<br/>';
+}?>
+</h2>
 
 </div>
 </body>

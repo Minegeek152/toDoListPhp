@@ -17,13 +17,14 @@ class TacheGateWay{
 		return $found_tache;
 	}
 	
-	public function getAllTaches() {
-		$taches=[];
+	public function getAllTaches() : array {
 		$query = "SELECT * FROM Tache";
 		try{
 			$this->con->executeQuery($query,array());
 			$results = $this->con->getResults();
-			foreach ($results as $row)
+			
+			foreach ($results as $row){
+
 				if($row['complete']==1){
 					$row['complete']=true;
 				}
@@ -31,6 +32,8 @@ class TacheGateWay{
 					$row['complete']=false;
 				}
 				$taches[]=new Tache($row['intitule'],$row['idListe'],$row['complete'],$row['idTache']);
+			}
+
 			return $taches;
 
 			}catch(PDOexception $e){
@@ -60,9 +63,9 @@ class TacheGateWay{
 			':idliste' => array($idliste,PDO::PARAM_INT)) );		
 	}
 	
-	public function completeTache(bool $compl, int $id){
-		$query = "UPDATE Tache SET complete = :compl WHERE idTache  = :id";
-		$this->con->executeQuery($query,array(':comp'=>array($compl,PDO::PARAM_INT),
+	public function completeTache(Tache $task){
+		$query = "UPDATE Tache SET complete = :complete WHERE idTache  = :id";
+		$this->con->executeQuery($query,array(':complete'=>array($complete,PDO::PARAM_INT),
 												':id'=>array($id,PDO::PARAM_INT)));
 	}
 	
