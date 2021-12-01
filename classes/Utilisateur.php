@@ -9,7 +9,7 @@ class Utilisateur
  	function __construct(string $pseudo,string $mdp)
  	{
  		$this->pseudo=$pseudo;
- 		$this->mdp=$mdp
+ 		$this->mdp=$mdp;
  	}
 
  	function __toString(){
@@ -29,7 +29,7 @@ class Utilisateur
     }
 
     function setMdp(string $mdp){
-        $this->mdp=$mdp
+        $this->mdp=$mdp;
     }
  } 
 

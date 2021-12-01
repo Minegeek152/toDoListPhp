@@ -9,7 +9,7 @@ class Membre
  	function __construct(string $pseudo,string $mdp)
  	{
  		$this->pseudo=$pseudo;
- 		$this->mdp=password_hash($mdp,PASSWORD_DEFAULT);
+ 		$this->mdp=$mdp;
  	}
 
  	function __toString(){
@@ -29,7 +29,7 @@ class Membre
     }
 
     function setMdp(string $mdp){
-        $this->mdp=password_hash($mdp,PASSWORD_DEFAULT);
+        $this->mdp=$mdp;
     }
  } 
 
