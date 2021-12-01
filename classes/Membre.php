@@ -13,7 +13,7 @@ class Membre
  	}
 
  	function __toString(){
- 		return 'Username : '.$this->pseudo.'<br/>MDP Hash : '.$this->mdp;
+ 		return $this->pseudo;
  	}
 
     function getPseudo(){
