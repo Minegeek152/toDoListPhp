@@ -42,7 +42,7 @@ ul.connecte{
 }
 /*partie central de la page*/
 div.ventre{
-	min-height: 250px;
+	min-height: 1000px;
 	background-color: white
 }
 
@@ -71,6 +71,10 @@ div#les_taches{
 div#nouv_tache{
 	display:flex;
 	justify-content:center;
+}
+
+div.une_liste{
+	border-color: black;
 }
 /*bas de page*/
 div.pied{

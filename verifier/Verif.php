@@ -6,8 +6,9 @@ class Verif{
         if (!isset($action)) {
             throw new Exception('il n\'y a pas d\'action');
 	}
-	
-	public function verifConnexion(string &$login,string &$mdp, string &$message){
+	}
+		
+	static function verifCompte(string &$login, string &$mdp, &$message){
 		
 		//vérification du login
 		if(!isset($login) || $login==""){
@@ -31,47 +32,9 @@ class Verif{
 			$message[] = 'le mot de passe n\'est pas valide';
 			$mdp="";
 		}
-	
 	}
 	
-	public function verifNouvCompte(string &$login, string &$mdp, string &$email, string &$message){
-		
-		//vérification du login
-		if(!isset($login) || $login==""){
-
-			$message[] = 'il faut renseigner un login';
-			$login="";
-		}
-		if($login != filter_var($login, FILTER_SANITIZE_STRING)){
-		
-			$message[] = 'le login n\'est pas valide';
-			$login="";
-		}
-
-		//vérification du mot de passe
-		if(!isset($mdp) || $mdp==""){
-
-			$message[] = 'il faut renseigner un mot de passe';
-			$mdp="";
-		}
-		if($mdp != filter_var($mdp, FILTER_SANITIZE_STRING)){
-			$message[] = 'le mot de passe n\'est pas valide';
-			$mdp="";
-		}
-
-		//vérification de l'email
-		if(!isset($email) || $email==""){
-
-			$message[] = 'il faut renseigner une adresse email';
-			$email="";
-		}
-		if($email != filter_var($email, FILTER_VALIDATE_EMAIL)){
-			$message[] = 'l\'adresse email n\'est pas valide';
-			$email="";
-		}
-	}
-	
-	public function verifListe (string &$nom, string $message){	
+	static function verifListe (string &$nom, &$message){	
 		
 		//vérification du nom de la tache
 		if(!isset($nom) || $nom==""){
@@ -84,7 +47,7 @@ class Verif{
 		}
 	}
 	
-	public function verifTache(string &$intitule, string &$message){
+	static function verifTache(string &$intitule, &$message){
 		
 		//vérification du l'intitulé
 		if(!isset($intitule) || $intitule==""){

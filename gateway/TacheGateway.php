@@ -7,7 +7,7 @@ class TacheGateWay{
 		$this->con = $con;
 	}
 	
-	public function findById(int $id) : Tache {
+	public function findByIdTache(int $id) : Tache {
 		$query = "SELECT * FROM Tache WHERE idTache = :id";
 		$this->con->executeQuery($query,array(':id'=>array($id,PDO::PARAM_INT)));
 		
@@ -16,6 +16,24 @@ class TacheGateWay{
 			$found_tache = new Tache($row['intitule'],$row['idListe'],$row['complete'],$row['idTache']);
 		return $found_tache;
 	}
+	
+	public function findByIdListe(int $id) : array {
+		$taches=[];
+		
+		$query = "SELECT * FROM Tache WHERE idListe = :id";
+		$this->con->executeQuery($query,array(':id'=>array($id,PDO::PARAM_INT)));
+		$results = $this->con->getResults();
+		foreach ($results as $row){
+			if($row['complete']==1){
+				$row['complete']=true;
+			}
+			else{
+				$row['complete']=false;
+			}
+			$taches[]=new Tache($row['intitule'],$row['idListe'],$row['complete'],$row['idTache']);
+		}
+		return $taches;
+}	
 	
 	public function newTache(Tache $task){
 

@@ -18,6 +18,15 @@ class MembreGateway{
 		return $found_membre;
 	}
 	
+	public function findByPseudo(string $pseudo) : Membre {
+		$query = "SELECT * FROM Membre WHERE pseudo = :pseudo";
+		$this->con->executeQuery($query,array(':pseudo'=>array($pseudo,PDO::PARAM_STR)));
+		
+		$results = $this->con->getResults();
+		foreach ($results as $row)
+			$found_membre = new Membre($row['pseudo'],$row['mdp'],$row['idMembre']);
+		return $found_membre;
+	}
 
 	public function newMembre(Membre $user){
 		$pseudo=$user->getPseudo();
@@ -43,7 +52,6 @@ class MembreGateway{
 		foreach ($results as $row)
 			$Membres[] = new Membre($row['pseudo'],$row['mdp']);
 		return $Membres;
-
 
 	}
 
