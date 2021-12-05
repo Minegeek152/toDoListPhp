@@ -14,14 +14,11 @@
 <h1 class="titre">What To Do ?</h1>
 </div>
 <nav class="le_menu">
-<ul>
-<li class="menu"> <a href="accueil.php">Accueil</a> </li>
-<li class="menu"> <a href="seconnecter.php">Se connecter</a> </li>
-<li class="menu"> <a href="nouvelleListe.php">Cr&eacute;er une liste publique</a></li>
-<li class="menu"> <a href="rechercheListe.php">Rechercher une liste</a></li>
-<ul class="connecte">
-<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
-</ul>
+<ul class="nav nav-tabs">
+<li class="nav-item active"> <a class="nav-link" href="accueil.php">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" href="nouvelleListe.php">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" href="rechercheListe.php">Rechercher une liste</a></li>
 </ul>
 </nav>
 </header>
@@ -29,6 +26,7 @@
 
 <h2 class="petit_titre">Inscription</h2>
 
+<div class="formulaire">
 <form action="" method="post">
 <p>
 <label for="login"> Login * :</label> 
@@ -38,8 +36,9 @@
 <label for="mdp"> Mot de passe * :</label> 
 <input type="password" id="mdp" name="mdp" required />
 </p>
-<input type="submit" value="Valider"/>
+<input class="voir_liste"type="submit" value="Valider"/>
 </form>
+</div>
 
 <?php
 	require("../classes/Connection.php");

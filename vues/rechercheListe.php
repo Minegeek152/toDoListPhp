@@ -14,33 +14,31 @@
 <h1 class="titre">What To Do ?</h1>
 </div>
 <nav class="le_menu">
-<ul>
-<li class="menu"> <a href="accueil.php">Accueil</a> </li>
-<li class="menu"> <a href="seconnecter.php">Se connecter</a> </li>
-<li class="menu"> <a href="nouvelleListe.php">Cr&eacute;er une liste publique</a></li>
-<li class="menu"> <a href="rechercheListe.php">Rechercher une liste</a></li>
-<ul class="connecte">
-<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
-</ul>
+<ul class="nav nav-tabs">
+<li class="nav-item active"> <a class="nav-link" href="accueil.php">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" href="nouvelleListe.php">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" href="rechercheListe.php">Rechercher une liste</a></li>
 </ul>
 </nav>
-</header>
 <div class="ventre">
 
 <h2 class="petit_titre">Rechercher une liste</h2>
 
+<div class="formulaire">
 <form action="" method="post">
 <p>
 <label for="nom"> Nom de la liste :</label> 
 <input type="text" id="nom" name="nom" required />
 </p>
-<input type="submit" value="Valider" />
+<input class="voir_liste" type="submit" value="Valider" />
 </form>
+</div>
 
 <?php
 	require("../classes/Connection.php");
 	require("../utils.php");
-	require("../../ListeGateway.php");
+	require("../gateway/ListeGateway.php");
 	require("../classes/Liste.php");
 	require("../verifier/Verif.php");
 
@@ -59,7 +57,7 @@
   				$list = $listGateway->findByNom($_POST['nom']);
   				?>
   				<div class="une_liste">
-    			<h4><a href="affichageListe.html"><?=$list->getNom()?></a></h4>
+  				<a href="affichageListe.php"><?=$list->getNom()?></a>
     			</div>
     	<?php
   			}catch(PDOException $e){

@@ -34,8 +34,7 @@ class ListeGateway{
 		
 		$results = $this->con->getResults();
 		foreach ($results as $row)
-			$found_list = new Liste($row['nom'],$row['idMembre'],$row['idListe']);
-		return $found_list;
+			return new Liste($row['nom'],$row['idMembre'],$row['idListe']);
 	}
 	
 	public function newListe(Liste $list){
@@ -49,13 +48,13 @@ class ListeGateway{
 			':idMembre' => array($idMembre,PDO::PARAM_STR)));
 	}
 	
-	public function updateLiteNom(Liste $list, string $pseudo){
+	public function updateListeNom(Liste $list, string $nom){
 		
-		$idListe=$list->getId();
+		$idListe=$list->getIdListe();
 
 		$query = "UPDATE Liste SET nom = :nom WHERE idListe = :id";
 		$this->con->executeQuery($query,array(
-			':nom'=>array($pseudo,PDO::PARAM_STR),
+			':nom'=>array($nom,PDO::PARAM_STR),
 			':id'=>array($idListe,PDO::PARAM_INT)));	
 	}
 	

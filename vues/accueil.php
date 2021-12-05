@@ -11,31 +11,33 @@
 
 <body>
 <header>
+
 <div class="tete">
 <h1 class="titre">What To Do ?</h1>
 </div>
+
 <nav class="le_menu">
-<ul>
-<li class="menu"> <a href="accueil.php">Accueil</a> </li>
-<li class="menu"> <a href="seconnecter.php">Se connecter</a> </li>
-<li class="menu"> <a href="nouvelleListe.php">Cr&eacute;er une liste publique</a></li>
-<li class="menu"> <a href="rechercheListe.php">Rechercher une liste</a></li>
-<ul class="connecte">
-<li class="menu"> <a href="nouvelleListe.html">Cr&eacute;er une liste privée</a></li>
-</ul>
+<ul class="nav nav-tabs">
+<li class="nav-item active"> <a class="nav-link" href="accueil.php">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" href="nouvelleListe.php">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" href="rechercheListe.php">Rechercher une liste</a></li>
 </ul>
 </nav>
+
 </header>
+
+
 <div class="ventre">
 
 <h2 class="petit_titre">Listes de t&acirc;ches</h2>
 
-<div>
+<div class="toutes_les_listes">
 	<?php 
 	require("../classes/Connection.php");
 	require("../utils.php");
-	require("../../ListeGateway.php");
-	require("../../TacheGateway.php");
+	require("../gateway/ListeGateway.php");
+	require("../gateway/TacheGateway.php");
 	require("../classes/Tache.php");
 	require("../classes/Liste.php");
 	
@@ -48,7 +50,10 @@
 	foreach ($listes as $row) {
     	?>
     	<div class="une_liste">
-    	<h4><a href="affichageListe.html"><?=$row->getNom()?></a></h4>
+    	<form action="affichageListe.php" method="POST">
+    	<label for="nom" ></label>
+		<input class="voir_liste" type="submit" id="nom" name="nom" value="<?=$row->getNom()?>" />    	
+    	
     	
     	<?php
     	$taches = $taskGateway->findByIdListe($row->getIdListe());
@@ -62,6 +67,7 @@
     	?>
 		<p><?=$value->getIntitule().'   fait? : '.$complete ?></p>
     	<?php } ?>
+    	</form>
     	</div>
 <?php	} ?>
 
