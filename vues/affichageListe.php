@@ -32,12 +32,8 @@
 <?php $nom = $_POST["nom"] ?>
 <h2 class="petit_titre"><?=$nom?></h2>
 
-<div id="modif">
-<form  action="" method="post">
-<label for="nom"></label>
-<input type="text" id="nom" name="nom" required />
-<input class="voir_liste" type="submit" value="Modifier le nom de la liste" />
-</form>
+<div id="les_taches">
+<ul>
 <?php
 	require("../verifier/Verif.php");
 	require("../classes/Connection.php");
@@ -58,39 +54,11 @@
 	$taches = $taskGateway->findByIdListe($liste_id);
 	
 	$message=[];
-	
-	if(isset($_POST['nom'])){
-		\Verif::verifTache($_POST['nom'],$message);
-	
-		if(!empty($message)){
-			require('erreur.php');
-		}
-		else{
-			try{
-				$listGateway->updateListeNom($liste,$_POST['nom']);
-  			}catch(PDOException $e){
-  				$message[]=$e->getMessage();
-				require('erreur.php');
-  			}
-		}
-	}
-?>
-</div>
-<div id="supp">
-<form>
-<input class="voir_liste" type="submit" value="Supprimer la liste" />
-</form>
-
-</div>
-
-<div id="les_taches">
-<ul>
-<?php
 	foreach($taches as $row){
 		if($row->isComplete()){
-		$complete="check";
+		$complete='done';
 		}
-		else $complete ="uncheck";
+		else $complete ='not done yet';
     		?>
 		<li><?=$row->getIntitule().'	->	'.$complete?></li>
 	<?php 

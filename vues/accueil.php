@@ -59,13 +59,11 @@
     	$taches = $taskGateway->findByIdListe($row->getIdListe());
     	foreach($taches as $value){
     		if($value->isComplete()){
-     		 $complete='oui';
-    		}
-   		else{
-      		$complete='non';
-    		}
+				$complete='done';
+			}
+			else $complete ='not done yet';
     	?>
-		<p><?=$value->getIntitule().'   fait? : '.$complete ?></p>
+		<p><?=$value->getIntitule().'	->	'.$complete ?></p>
     	<?php } ?>
     	</form>
     	</div>
