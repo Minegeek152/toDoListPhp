@@ -1,10 +1,8 @@
 body{background-color:#3A3A3A;}
 
-/*haut de page*/
-header{
-	background-color:#724278;
-}
+
 div.tete{
+	background-color:#724278;
 	display: flex;
 	justify-content : center;
 }
@@ -13,36 +11,16 @@ h1.titre{
 	color:white;
 }
 
-nav.le_menu ul li{
-display:inline-block;
-}
-
-li.menu:hover{
-font-size:13px;
-}
 
 .le_menu{
 	display:flex;
 	justify-content:center;
 }
 
-li.menu{
-	padding:3px 3px 3px 3px;
-	font-size:15px;
-	background:#FFFFFF;
-	box-shadow:3px 3px 2px black;
-}
-
-ul.connecte{
-	padding:3px 3px 3px 3px;
-	font-size:15px;
-	background:#FFFFFF;
-	box-shadow:3px 3px 2px black;
-	display : none;
-}
 /*partie central de la page*/
 div.ventre{
-	background-color: white
+	height: 500px;
+	background-color: white;
 }
 
 h2.petit_titre{
@@ -62,10 +40,35 @@ div#supp{
 	justify-content : flex-end;
 }
 
-div#gauche{
+div#les_taches{
 	display:flex;
-	justify-content:flex-end;
+	justify-content:center;
 }
+
+div#nouv_tache{
+	display:flex;
+	justify-content:center;
+}
+
+div.une_liste{
+	padding: 30px;
+}
+
+div.toutes_les_listes{
+	display:flex;
+	justify-content:center;
+}
+
+input.voir_liste{
+	color:white;
+	background-color: #724278;
+	border-color: black;
+}
+div.formulaire{
+	display:flex;
+	justify-content:center;
+}
+
 /*bas de page*/
 div.pied{
 	margin-top: 10px;
@@ -73,7 +76,7 @@ div.pied{
 	background-color:#724278;
 	display: flex;
 	justify-content : center;
-	align-self: flex-end;
+	align-items:flex-end;
 }
 
 h3.iep{
