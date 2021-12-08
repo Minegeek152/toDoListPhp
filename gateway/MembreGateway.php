@@ -56,7 +56,7 @@ class MembreGateway{
 	}
 
 
-	public function updateMembrePseudo(Membre $membre){
+	public function updateMembrePseudo(Membre $membre, $pseudo){
 		
 		$idMembre=$membre->getId();
 
