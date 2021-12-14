@@ -5,8 +5,19 @@ class Verif{
 
         if (!isset($action)) {
             throw new Exception('il n\'y a pas d\'action');
+			}
 	}
-	}
+		
+	static function verif_str(string $str){
+		global $message;
+		if(!isset($str) || $str == ""){
+			$message[] = 'la chaîne de caractères est vide';
+		}
+		if($str != filter_var($str,FILTER_SANITIZE_STRING)){
+			$message[]='la chaîne de caractères n\'est pas valide';
+		}
+		
+	}		
 		
 	static function verifCompte(string &$login, string &$mdp, &$message){
 		
