@@ -8,7 +8,7 @@ Autoload::charger();
 
 
 
-$front=new FrontControleur();
+$front=new FrontCtrl();
 
 
  ?>
