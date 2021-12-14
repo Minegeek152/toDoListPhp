@@ -14,7 +14,7 @@ class Liste{
 		return $this->nom;
 	}
 
-	function getIdListe():int{
+	public function getIdListe():int{
 		return $this->idListe;
 	}
 
