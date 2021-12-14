@@ -27,7 +27,7 @@
 <h2 class="petit_titre">Cr&eacute;er une liste</h2>
 
 <div class="formulaire">
-<form action="" method="post">
+<form action="index.php?action=ajouterlistepublique" method="post">
 <p>
 <label for="nom"> Nom de la liste :</label> 
 <input type="text" id="nom" name="nom" required />
@@ -35,35 +35,6 @@
 <input class="voir_liste" type="submit" value="Valider" />
 </form>
 </div>
-<?php
-require("../classes/Connection.php");
-	require("../utils.php");
-	require("../gateway/ListeGateway.php");
-	require("../classes/Liste.php");
-	require("../verifier/Verif.php");
-
-	$message=[];
-	$connect = new Connection($dns,$user,$pass);
-	$listGateway = new ListeGateway($connect);
-	
-	if(isset($_POST['nom'])){
-		\Verif::verifListe($_POST['nom'],$message);
-	
-		if(!empty($message)){
-			require('erreur.php');
-		}
-		else{
-			$list = new Liste($_POST['nom'],1);//pour l'instant c'est l'identitifant du membre 1, mais apres on devra le recuperer de quelque part
-			try{
-  				$listGateway->newListe($list);
-  			}catch(PDOException $e){
-  				$message[]=$e->getMessage();
-				require('erreur.php');
-  			}
-		}
-	}	
-?>
-
 </div>
 </body>
 
