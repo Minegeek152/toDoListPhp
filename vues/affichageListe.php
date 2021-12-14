@@ -12,61 +12,49 @@
 
 <header>
 
-<div class="tete">
-<h1 class="titre">What To Do ?</h1>
+<div class="fixed-top">
+<div class="p-3 mb-2 bg-success text-white">
+<div class="d-flex justify-content-center">
+<h1 class="display-6">What To Do ?</h1>
 </div>
 
-<nav class="le_menu">
+<div class="d-flex justify-content-center">
+<nav>
 <ul class="nav nav-tabs">
-<li class="nav-item active"> <a class="nav-link" href="accueil.php">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" href="seconnecter.php">Se connecter</a> </li>
-<li class="nav-item"> <a class="nav-link" href="nouvelleListe.php">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" href="rechercheListe.php">Rechercher une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="<?=$rep.vues['accueil']?>">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?page=nouvelleListe.php">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="rechercheListe.php">Rechercher une liste</a></li>
 </ul>
 </nav>
-
+</div>
+</div>
+</div>
 </header>
 
 <div class="ventre">
 
-<?php $nom = $_POST["nom"] ?>
-<h2 class="petit_titre"><?=$nom?></h2>
+<div class="d-flex justify-content-center">
+<h2 class="petit_titre"><?=$nom_liste?></h2>
+</div>
 
+<div class="d-flex justify-content-center">
 <div id="les_taches">
 <ul>
 <?php
-	require("../verifier/Verif.php");
-	require("../classes/Connection.php");
-	require("../utils.php");
-	require("../gateway/ListeGateway.php");
-	require("../gateway/TacheGateway.php");
-	require("../classes/Tache.php");
-	require("../classes/Liste.php");
-	
-	$connect = new Connection($dns,$user,$pass);
-	$listGateway = new ListeGateway($connect);
-	$taskGateway = new TacheGateway($connect);
-	
-	$liste=$listGateway->findByNom($nom);
-	$liste_id = $liste->getIdListe();
-	
-	
-	$taches = $taskGateway->findByIdListe($liste_id);
-	
-	$message=[];
-	foreach($taches as $row){
-		if($row->isComplete()){
+	foreach($taches as $unetache){
+		if($unetache->isComplete()){
 		$complete='done';
 		}
 		else $complete ='not done yet';
     		?>
-		<li><?=$row->getIntitule().'	->	'.$complete?></li>
+		<li><?=$unetache->getIntitule().'	->	'.$complete?></li>
 	<?php 
 		} 
 	?>
 <ul>
 </div>
-
+</div>
 <div id="nouv_tache">
 <aside>
 <form class="gerer" action="" method="post">

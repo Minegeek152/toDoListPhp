@@ -14,11 +14,11 @@ class CtrlUtilisateur{
 						break;
 					case 'creercompte' :
 						$this->($message);
-						break;
-					case 'afficherliste' :
+						break;*/
+					case 'affichageListe' :
 						$this->affichageListe($message);
 						break;
-					case 'rechercherlistepublique' :
+					/*case 'rechercherlistepublique' :
 						$this->rechercheListe($message);
 						break;
 					case 'ajoutertache' :
@@ -61,23 +61,45 @@ class CtrlUtilisateur{
 	}
 
 	function Reinit(){
-	global $rep, $vues;
+		global $rep, $vues;
 	
-	$model = new MdlListeTache();
-	$listes = $model->getAllListes();	
-	require($rep.$vues['accueil']);
+		$modele = new MdlListeTache();
+		$listes = $modele->getAllListes();
+		foreach($listes as $row){
+			$id=$row->getIdListe();
+			$taches[] = $modele->findTacheByIdListe($id);
+		}
+		require($rep.$vues['accueil']);
 	}
 	
 	function ajouterListePublique($message){
-	global $rep, $vues;
+		global $rep, $vues;
+		if(isset($_POST['nom'])){
+			$nom = $_POST['nom'];
+			Verif::verif_str($nom);
+			$model = new MdlListeTache();
+			$model->newListe($nom,1);//1 c'est le 'membre' utilisateur
+			$this->Reinit();
+		}else{
+			require($rep.$vues['nouvelleliste']);
+		}
 	
-	$nom = $_POST['nom'];
-	Verif::verif_str($nom);
+	}
 	
-	$model = new MdlListeTache();
-	$model->newListe($nom,1);
+	function affichageListe($message){
+		global $rep, $vues;
+		if(isset($_POST['nom_liste'])){
+			$nom_liste = $_POST['nom_liste'];
+			Verif::verif_str($nom_liste);
+			$model = new MdlListeTache();
+			$liste = $modele->findListeByNom($nom_liste);
+			$id = $liste->getIdListe();
+			$taches = $model->findTachesByIdListe($id);
+			require($rep.$vues['affichageliste']);
+		}else{
+			$this->Reinit();
+		}
 	
-	require($rep.$vues['accueil']);
 	}
 	
 }

@@ -10,29 +10,39 @@
 
 <body>
 <header>
-<div class="tete">
-<h1 class="titre">What To Do ?</h1>
+
+<div class="fixed-top">
+<div class="p-3 mb-2 bg-success text-white">
+<div class="d-flex justify-content-center">
+<h1 class="display-6">What To Do ?</h1>
 </div>
-<nav class="le_menu">
+
+<div class="d-flex justify-content-center">
+<nav>
 <ul class="nav nav-tabs">
-<li class="nav-item active"> <a class="nav-link" href="accueil.php">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" href="seconnecter.php">Se connecter</a> </li>
-<li class="nav-item"> <a class="nav-link" href="nouvelleListe.php">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" href="rechercheListe.php">Rechercher une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="<?=$rep.vues['accueil']?>">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="rechercheListe.php">Rechercher une liste</a></li>
 </ul>
 </nav>
+</div>
+</div>
+</div>
 </header>
 <div class="ventre">
 
+<div class="d-flex justify-content-center">
 <h2 class="petit_titre">Cr&eacute;er une liste</h2>
+</div>
 
-<div class="formulaire">
+<div class="d-flex justify-content-center">
 <form action="index.php?action=ajouterlistepublique" method="post">
 <p>
 <label for="nom"> Nom de la liste :</label> 
 <input type="text" id="nom" name="nom" required />
 </p>
-<input class="voir_liste" type="submit" value="Valider" />
+<button class="btn btn-success" type="submit" id="nouvliste" name="nouvliste" >Valider</button>
 </form>
 </div>
 </div>
