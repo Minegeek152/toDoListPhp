@@ -11,7 +11,7 @@
 <body>
 <header>
 
-<div class="fixed-top">
+<div>
 <div class="p-3 mb-2 bg-success text-white">
 <div class="d-flex justify-content-center">
 <h1 class="display-6">What To Do ?</h1>

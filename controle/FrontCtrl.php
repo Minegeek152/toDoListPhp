@@ -26,7 +26,7 @@ class FrontCtrl{
 					$ctrl_membre = new CtrlMembre();
 				}
 			}else{
-				$ctrl_utilisateur = new CtrlUtilisateur();
+				$ctrl_utilisateur = new CtrlUtilisateur($action);
 			}
 
 		}catch(Exception $e){

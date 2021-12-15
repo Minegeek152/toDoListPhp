@@ -11,7 +11,7 @@
 <body>
 <header>
 
-<div class="fixed-top">
+<div>
 <div class="p-3 mb-2 bg-success text-white">
 <div class="d-flex justify-content-center">
 <h1 class="display-6">What To Do ?</h1>
@@ -64,7 +64,7 @@
     	</form>
     	</div>
 		<?php
-		 }//termine le foreach des listes (qui commence dans le constructeur)
+		 }
 		?> 
 
 </div>
@@ -74,11 +74,13 @@
 </body>
 
 <footer>
+<div class="p-3 mb-2 bg-success text-white">
 <div class="d-flex justify-content-center">
 <p class="iep">Sophia Solignac - Lou Labussiere</p>
 </div>
 <div class="d-flex justify-content-center">
 <p>Groupe 8</p>
+</div>
 </div>
 </footer>
 </html>

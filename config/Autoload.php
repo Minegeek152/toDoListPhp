@@ -37,10 +37,8 @@ class Autoload
         $dir =array('modele/','./','config/','controle/','classes/','gateway/');
         foreach ($dir as $d){
             $file=$rep.$d.$filename; 
-            echo "$file.<br/>";
             if (file_exists($file))
             {
-                print
                 include $file;
             }
         }

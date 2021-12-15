@@ -1,9 +1,8 @@
 <?php
 class CtrlUtilisateur{
 
-	public function __construct(){
-		global $rep, $vues, $message, $action;
-	
+	public function __construct($action){
+		global $rep, $vues, $message;
 		try{
 			switch($action){
 					case NULL : //pas d'action, on appelle vue principale
