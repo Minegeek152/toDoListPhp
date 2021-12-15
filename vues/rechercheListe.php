@@ -11,7 +11,7 @@
 <body>
 <header>
 
-<div class="fixed-top">
+<div>
 <div class="p-3 mb-2 bg-success text-white">
 <div class="d-flex justify-content-center">
 <h1 class="display-6">What To Do ?</h1>
@@ -20,16 +20,17 @@
 <div class="d-flex justify-content-center">
 <nav>
 <ul class="nav nav-tabs">
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="<?=$rep.vues['accueil']?>">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="seconnecter.php">Se connecter</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?page=nouvelleListe.php">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="rechercheListe.php">Rechercher une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=seconnecter">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=rechercherliste">Rechercher une liste</a></li>
 </ul>
 </nav>
 </div>
 </div>
 </div>
 </header>
+
 <div class="ventre">
 
 <div class="d-flex justify-content-center">
@@ -37,54 +38,25 @@
 </div>
 
 <div class="d-flex justify-content-center">
-<form action="" method="post">
-<p>
-<label for="nom"> Nom de la liste :</label> 
-<input type="text" id="nom" name="nom" required />
-</p>
-<input class="voir_liste" type="submit" value="Valider" />
+<form action="index.php?action=rechercherliste" method="POST">
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="nom" name="nom" placeholder="Rechercher une liste"/>
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
+</div>
 </form>
 </div>
-
-<?php
-	require("../classes/Connection.php");
-	require("../utils.php");
-	require("../gateway/ListeGateway.php");
-	require("../classes/Liste.php");
-	require("../verifier/Verif.php");
-
-	$message=[];
-	$connect = new Connection($dns,$user,$pass);
-	$listGateway = new ListeGateway($connect);
-	
-	if(isset($_POST['nom'])){
-		\Verif::verifListe($_POST['nom'],$message);
-	
-		if(!empty($message)){
-			require('erreur.php');
-		}
-		else{
-			try{
-  				$list = $listGateway->findByNom($_POST['nom']);
-  				?>
-  				<div class="une_liste">
-  				<a href="affichageListe.php"><?=$list->getNom()?></a>
-    			</div>
-    	<?php
-  			}catch(PDOException $e){
-  				$message[]=$e->getMessage();
-				require('erreur.php');
-  			}
-		}
-	}	
-?>
 
 </div>
 </body>
 
 <footer>
-<div class="pied">
-<p class="iep">Sophia Solignac - Lou Labussiere <br/>Groupe 8</p>
+<div class="p-3 mb-2 bg-success text-white">
+<div class="d-flex justify-content-center">
+<p class="iep">Sophia Solignac - Lou Labussiere</p>
+</div>
+<div class="d-flex justify-content-center">
+<p>Groupe 8</p>
+</div>
 </div>
 </footer>
 </html>

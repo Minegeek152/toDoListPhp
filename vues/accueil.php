@@ -20,10 +20,10 @@
 <div class="d-flex justify-content-center">
 <nav>
 <ul class="nav nav-tabs">
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="<?=$rep.vues['accueil']?>">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=seconnecter">Se connecter</a> </li>
 <li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="rechercheListe.php">Rechercher une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=rechercherliste">Rechercher une liste</a></li>
 </ul>
 </nav>
 </div>
@@ -45,8 +45,9 @@
 	?>
     	<div class="une_liste">
     	<form action="index.php?action=affichageListe" method="POST">
-    	<label for="nom_liste" ></label>
-		<button class="btn btn-success" type="submit" id="nom" name="nom"><?=$uneliste->getNom()?></button>   	
+    	<label for="nom" ></label>
+    	<input type="submit" id="nom" name="nom" value="<?=$uneliste->getNom()?>" />
+		<!--button class="btn btn-success" type="submit" id="nom" name="nom"><?=$uneliste->getNom()?></button-->   	
     	<?php
 		foreach($taches as $tachesbyid){
 			foreach($tachesbyid as $unetache){

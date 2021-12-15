@@ -12,12 +12,12 @@ class MdlListeTache{
 		return $array_taches;
 	}
 
-	function findTacheByIdTache($id) : Tache{
+	function findTachesByIdTache($id) : Tache{
 		$tache = $taskGateway->findByIdTache($id);
 		return $tache;
 	}
 	
-	function findTacheByIdListe($idListe) : array {
+	function findTachesByIdListe($idListe) : array {
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$taskGateway = new TacheGateway($con);
@@ -26,6 +26,9 @@ class MdlListeTache{
 	}
 	
 	function newTache($intitule, $idListe){
+		global $dns,$user,$pass;
+		$con = new Connection($dns,$user,$pass);
+		$taskGateway = new TacheGateway($con);
 		$tache = new Tache($intitule,$idListe);
 		$taskGateway->newTache($tache);
 	}
@@ -36,6 +39,9 @@ class MdlListeTache{
 	}
 	
 	function deleteTache($intitule, $idListe){
+		global $dns,$user,$pass;
+		$con = new Connection($dns,$user,$pass);
+		$taskGateway = new TacheGateway($con);
 		$tache = new Tache($intitule,$idListe);
 		$taskGateway->deleteTache($tache);
 	}
@@ -55,7 +61,13 @@ class MdlListeTache{
 	}
 	
 	function findListeByNom($nom) : Liste {
-		$liste = findByNom($nom);
+		global $dns, $user, $pass;
+		$con = new Connection($dns,$user,$pass);
+		$listGateway = new ListeGateway($con);
+		$liste = $listGateway->findByNom($nom);
+		if($liste == NULL){
+			
+		}
 		return $liste;
 	}
 	
@@ -65,16 +77,25 @@ class MdlListeTache{
 	}
 	
 	function newListe($nom, $idMembre){
+		global $dns, $user, $pass;
+		$con = new Connection($dns,$user,$pass);
+		$listGateway = new ListeGateway($con);
 		$liste = new Liste($nom, $idMembre);
 		$listGateway->newListe($liste);	
 	}
 	
 	function updateListeNom($nom, $idMembre, $nouv_nom){
-		$liste = new Liste($nom, $idMembre);
-		$listGateway->updateListeNom($liste,$nom);
+		global $dns, $user, $pass;
+		$con = new Connection($dns,$user,$pass);
+		$listGateway = new ListeGateway($con);
+		$liste = $this->findListeByNom($nom);
+		$listGateway->updateListeNom($liste,$nouv_nom);
 	}
 	
 	function deleteListe($nom, $idMembre){
+		global $dns, $user, $pass;
+		$con = new Connection($dns,$user,$pass);
+		$listGateway = new ListeGateway($con);
 		$liste = new Liste($nom, $idMembre);
 		$listGateway->updateListeNom($liste,$nom);
 	}

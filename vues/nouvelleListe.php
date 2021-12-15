@@ -20,16 +20,17 @@
 <div class="d-flex justify-content-center">
 <nav>
 <ul class="nav nav-tabs">
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="<?=$rep.vues['accueil']?>">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="seconnecter.php">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=seconnecter">Se connecter</a> </li>
 <li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="rechercheListe.php">Rechercher une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=rechercherliste">Rechercher une liste</a></li>
 </ul>
 </nav>
 </div>
 </div>
 </div>
 </header>
+
 <div class="ventre">
 
 <div class="d-flex justify-content-center">
@@ -37,20 +38,25 @@
 </div>
 
 <div class="d-flex justify-content-center">
-<form action="index.php?action=ajouterlistepublique" method="post">
-<p>
-<label for="nom"> Nom de la liste :</label> 
-<input type="text" id="nom" name="nom" required />
-</p>
-<button class="btn btn-success" type="submit" id="nouvliste" name="nouvliste" >Valider</button>
+<form action="index.php?action=ajouterlistepublique" method="POST">
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="nom" name="nom" placeholder="Créer une nouvelle liste"/>  
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
+</div>
 </form>
 </div>
+
 </div>
 </body>
 
 <footer>
-<div class="pied">
-<p class="iep">Sophia Solignac - Lou Labussiere<br/>Groupe 8</p>
+<div class="p-3 mb-2 bg-success text-white">
+<div class="d-flex justify-content-center">
+<p class="iep">Sophia Solignac - Lou Labussiere</p>
+</div>
+<div class="d-flex justify-content-center">
+<p>Groupe 8</p>
+</div>
 </div>
 </footer>
 </html>

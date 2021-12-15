@@ -11,7 +11,7 @@
 <body>
 <header>
 
-<div class="fixed-top">
+<div>
 <div class="p-3 mb-2 bg-success text-white">
 <div class="d-flex justify-content-center">
 <h1 class="display-6">What To Do ?</h1>
@@ -20,16 +20,17 @@
 <div class="d-flex justify-content-center">
 <nav>
 <ul class="nav nav-tabs">
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="<?=$rep.vues['accueil']?>">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="seconnecter.php">Se connecter</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?page=nouvelleListe.php">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="rechercheListe.php">Rechercher une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=">Accueil</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=seconnecter">Se connecter</a> </li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
+<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=rechercherliste">Rechercher une liste</a></li>
 </ul>
 </nav>
 </div>
 </div>
 </div>
 </header>
+
 <div class="ventre">
 
 <div class="d-flex justify-content-center">
@@ -37,54 +38,30 @@
 </div>
 
 <div class="d-flex justify-content-center">
-<form action="" method="post">
+<form action="index.php?action=nouveaucompte" method="post">
 <p>
-<label for="login"> Login * :</label> 
-<input type="text" id="login" name="login" required />
+<input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required />
 </p>
 <p>
-<label for="mdp"> Mot de passe * :</label> 
-<input type="password" id="mdp" name="mdp" required />
+<input type="password" id="mdp" name="mdp" placeholder="Mot de passe" required />
 </p>
-<input class="voir_liste"type="submit" value="Valider"/>
+<button type="submit" class="btn btn-success">Valider</button>
 </form>
+
 </div>
 
-<?php
-	require("../classes/Connection.php");
-	require("../utils.php");
-	require("../gateway/MembreGateway.php");
-	require("../classes/Membre.php");
-	require("../verifier/Verif.php");
-
-	$message=[];
-	$connect = new Connection($dns,$user,$pass);
-	$userGateway = new MembreGateway($connect);
-	
-	if(isset($_POST['login'],$_POST['mdp'])){
-		\Verif::verifCompte($_POST['login'],$_POST['mdp'],$message);
-	
-		if(!empty($message)){
-			require('erreur.php');
-		}
-		else{
-			$user = new Membre($_POST['login'],$_POST['mdp']);
-			try{
-  				$userGateway->newMembre($user);
-  			}catch(PDOException $e){
-  				$message[]=$e->getMessage();
-				require('erreur.php');
-  			}
-		}
-	}	
-?>
 
 </div>
 </body>
 
 <footer>
-<div class="pied">
-<p class="iep">Sophia Solignac - Lou Labussiere<br/>Groupe 8</p>
+<div class="p-3 mb-2 bg-success text-white">
+<div class="d-flex justify-content-center">
+<p class="iep">Sophia Solignac - Lou Labussiere</p>
+</div>
+<div class="d-flex justify-content-center">
+<p>Groupe 8</p>
+</div>
 </div>
 </footer>
 </html>

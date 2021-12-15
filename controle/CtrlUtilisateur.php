@@ -8,22 +8,22 @@ class CtrlUtilisateur{
 					case NULL : //pas d'action, on appelle vue principale
 						$this->Reinit();
 						break;
-					/*case 'seconnecter' :
-						$this->($message);
+					case 'seconnecter' :
+						$this->seConnecter($message);
 						break;
-					case 'creercompte' :
-						$this->($message);
-						break;*/
+					case 'nouveaucompte' :
+						$this->nouveauCompte($message);
+						break;
 					case 'affichageListe' :
 						$this->affichageListe($message);
 						break;
-					/*case 'rechercherlistepublique' :
-						$this->rechercheListe($message);
+					case 'rechercherliste' :
+						$this->rechercherListe($message);
 						break;
 					case 'ajoutertache' :
-						$this->($message);
+						$this->ajouterTache($message);
 						break;
-					case 'completertache' :
+					/*case 'completertache' :
 						$this->($message);
 						break;
 					case 'supprimertache' :
@@ -32,12 +32,12 @@ class CtrlUtilisateur{
 					case 'ajouterlistepublique' :
 						$this->ajouterListePublique($message);
 						break;
-					/*case 'modifierlistepublique' :
-						$this->($message);
+					case 'modifierliste' :
+						$this->modifierListe($message);
 						break;
-					case 'supprimerlistepublique' :
-						$this->($message);
-						break;*/
+					case 'supprimerliste' :
+						$this->supprimerListe($message);
+						break;
 					
 					default:
 					$message[]="Erreur appel php!";
@@ -66,39 +66,166 @@ class CtrlUtilisateur{
 		$listes = $modele->getAllListes();
 		foreach($listes as $row){
 			$id=$row->getIdListe();
-			$taches[] = $modele->findTacheByIdListe($id);
+			$taches[] = $modele->findTachesByIdListe($id);
 		}
 		require($rep.$vues['accueil']);
 	}
 	
-	function ajouterListePublique($message){
+	function seConnecter($message){
 		global $rep, $vues;
-		if(isset($_POST['nom'])){
-			$nom = $_POST['nom'];
-			Verif::verif_str($nom);
+		if(isset($_POST['pseudo']) && isset($_POST['mdp'])){
+			$pseudo = $_POST['pseudo'];
+			$mdp = $_POST['mdp'];
+			Verif::verif_str($pseudo);
+			Verif::verif_str($mdp);
+			
 			$model = new MdlListeTache();
-			$model->newListe($nom,1);//1 c'est le 'membre' utilisateur
-			$this->Reinit();
+			
+			
 		}else{
-			require($rep.$vues['nouvelleliste']);
+			require($rep.$vues['seconnecter']);
 		}
+	}	
 	
+	function nouveauCompte($message){
+		global $rep, $vues;
+		if(isset($_POST['pseudo']) && isset($_POST['mdp'])){
+			$pseudo = $_POST['pseudo'];
+			$mdp = $_POST['mdp'];
+			Verif::verif_str($pseudo);
+			Verif::verif_str($mdp);
+			
+			$model = new MdlListeTache();
+			
+			
+		}else{
+			require($rep.$vues['nouveaucompte']);
+		}
 	}
 	
 	function affichageListe($message){
 		global $rep, $vues;
-		if(isset($_POST['nom_liste'])){
-			$nom_liste = $_POST['nom_liste'];
+		if(isset($_POST['nom'])){
+			$nom_liste = $_POST['nom'];
 			Verif::verif_str($nom_liste);
-			$model = new MdlListeTache();
+			
+			$modele = new MdlListeTache();
 			$liste = $modele->findListeByNom($nom_liste);
 			$id = $liste->getIdListe();
-			$taches = $model->findTachesByIdListe($id);
+			
+			$taches = $modele->findTachesByIdListe($id);
 			require($rep.$vues['affichageliste']);
 		}else{
 			$this->Reinit();
 		}
 	
+	}
+	
+	function rechercherListe($message){
+		global $rep, $vues;
+		if(isset($_POST['nom'])){
+			$nom_liste = $_POST['nom'];
+			Verif::verif_str($nom_liste);
+			
+			$modele = new MdlListeTache();
+			try{
+				$liste = $modele->findListeByNom($nom_liste);
+				$id = $liste->getIdListe();
+			
+				$taches = $modele->findTachesByIdListe($id);
+				require($rep.$vues['affichageliste']);
+			}
+			catch(PDOException $e){
+			$message[]="Erreur!! ".$e;
+			require($rep.$vues['erreur']);
+			}
+		}else{
+			require($rep.$vues['rechercherliste']);
+		}
+	}
+	
+	function ajouterListePublique($message){
+		global $rep, $vues;
+		if(isset($_POST['nom'])){
+			$nom_liste = $_POST['nom'];
+			Verif::verif_str($nom_liste);
+			
+			$model = new MdlListeTache();
+			$model->newListe($nom_liste,1);//1 c'est le 'membre' utilisateur
+			
+			$this->affichageListe($message);
+		}else{
+			require($rep.$vues['nouvelleliste']);
+		}
+	
+	}
+
+	function modifierListe($message){
+		global $rep, $vues;
+		if(isset($_POST['nouv_nom']) && isset($_POST['nom_liste'])){
+			$nouv_nom = $_POST['nouv_nom'];
+			$nom_liste = $_POST['nom_liste'];
+			
+			Verif::verif_str($nouv_nom);
+			Verif::verif_str($nom_liste);
+			$modele = new MdlListeTache();
+			
+			$liste = $modele->findListeByNom($nom_liste);
+			$id = $liste->getIdListe();
+			
+			$modele->updateListeNom($nom_liste, 1, $nouv_nom);
+			
+			$taches = $modele->findTachesByIdListe($id);
+			require($rep.$vues['affichageliste']);
+		}else{
+			$this->Reinit();
+		}
+	}
+	
+	function ajouterTache($message){
+		global $rep, $vues;
+		if(isset($_POST['nouv_tache']) && isset($_POST['nom_liste'])){
+			$nouv_tache = $_POST['nouv_tache'];
+			$nom_liste = $_POST['nom_liste'];
+			
+			Verif::verif_str($nouv_tache);
+			Verif::verif_str($nom_liste);
+			$modele = new MdlListeTache();
+			
+			$liste = $modele->findListeByNom($nom_liste);
+			$id = $liste->getIdListe();
+			
+			$modele-> newTache($nouv_tache, $id);
+			
+			$taches = $modele->findTachesByIdListe($id);
+			require($rep.$vues['affichageliste']);
+		}else{
+			$this->Reinit();
+		}
+		
+	}
+	
+	function supprimerListe($message){
+		global $rep, $vues;
+		if(isset($_POST['nom_liste'])){
+			$nom_liste = $_POST['nom_liste'];
+			Verif::verif_str($nom_liste);
+			
+			$modele = new MdlListeTache();		
+			$liste = $modele->findListeByNom($nom_liste);
+			$id = $liste->getIdListe();
+			$taches = $modele->findTachesByIdListe($id);
+			
+			foreach($taches as $unetache){
+				$nom_tache = $unetache->getIntitule();
+				$modele->deleteTache($nom_tache,$id);
+			}
+			deleteListe($nom_liste,1);
+			$this->Reinit();//marche pas
+		}else{
+			$this->Reinit();
+		}
+		
 	}
 	
 }
