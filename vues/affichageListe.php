@@ -10,27 +10,7 @@
 
 <body>
 
-<header>
-
-<div>
-<div class="p-3 mb-2 bg-success text-white">
-<div class="d-flex justify-content-center">
-<h1 class="display-6">What To Do ?</h1>
-</div>
-
-<div class="d-flex justify-content-center">
-<nav>
-<ul class="nav nav-tabs">
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=seconnecter">Se connecter</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=rechercherliste">Rechercher une liste</a></li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</header>
+<?php include("header.html");?>
 
 
 <div class="ventre">
@@ -47,23 +27,41 @@
 
 </div>
 </form>
-<div class="d-flex justify-content-center">
-<div id="les_taches">
-<ul>
 <?php
 	foreach($taches as $unetache){
+		$nom_tache = $unetache->getIntitule();
 		if($unetache->isComplete()){
-		$complete='done';
-		}
-		else $complete ='not done yet';
+			$complete='uncheck';
+			}
+			else $complete ='check';
     		?>
-		<li><?=$unetache->getIntitule().'	->	'.$complete?></li>
+    	<div class="d-flex justify-content-center">	
+    		<div class="container">
+  				<div class="row">
+    				<div class="col">
+      				<p><?=$nom_tache?></p>
+    				</div>
+    				<div class="col">
+      				<div class="form-check">
+							<form>
+  								<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+  								<label class="form-check-label" for="flexCheckChecked"><?=$complete?></label>
+  							</form>
+						</div>
+    				</div>
+    				<div class="col">
+     					<form action="" method="POST">
+							<input type="hidden" id="nom_tache" name="nom_tache" value="<?=$nom_tache?>"/>
+							<button type="submit" class="btn btn-success">Supprimer</button>
+						</form>
+    				</div>
+  				</div>
+			</div>
+		</div>
+		
 	<?php 
 		} 
 	?>
-<ul>
-</div>
-</div>
 
 <div class="d-flex justify-content-center">
 <form action="index.php?action=ajoutertache" method="POST">
@@ -84,14 +82,5 @@
 
 </div>
 </body>
-<footer>
-<div class="p-3 mb-2 bg-success text-white">
-<div class="d-flex justify-content-center">
-<p class="iep">Sophia Solignac - Lou Labussiere</p>
-</div>
-<div class="d-flex justify-content-center">
-<p>Groupe 8</p>
-</div>
-</div>
-</footer>
+<?php include("footer.html");?>
 </html>
