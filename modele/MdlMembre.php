@@ -3,21 +3,27 @@
 	class MdlMembre{
 		
 		public function connexion(String $pseudo, string $mdp){
+			global $dns,$user,$pass,$message;
 			$con = new Connection($dns,$user,$pass);
 			//verif
 			$memberGateway = new MembreGateway($con);
+
 			
 			$results = $memberGateway->findByPseudo($pseudo);
-			if(empty($results)){
-				$message[] = "Ce membre n'existe pas dans la base de données";			
+			if($results==NULL){	
+				return "ErrPseudo";	
 			}
-			$password = $results['mdp'];
-			if(password_verify($mdp,$password,'BCRYPT')){
-				$_SESSION['role']='membre';
-				$_SESSION['login']=$pseudo;	
-			}else{
-				$message[] = "Le mot de passe est incorrecte";	
+			else{
+				$password = $results->getPseudo();
+				if(password_verify($mdp,$password)){
+					$_SESSION['role']='membre';
+					$_SESSION['login']=$pseudo;	
+				}else{
+					return "ErrMdp";
+				}
 			}
+			
+			return "ok";
 		}	
 	
 		public function deconnexion(){

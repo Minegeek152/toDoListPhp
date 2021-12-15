@@ -79,9 +79,19 @@ class CtrlUtilisateur{
 			Verif::verif_str($pseudo);
 			Verif::verif_str($mdp);
 			
-			$model = new MdlListeTache();
-			
-			
+			$model = new MdlMembre();
+			$reponse=$model->connexion($pseudo,$mdp);
+			if($reponse=="ErrPseudo"){
+				$message['ERR_PSEUDO'] = "Pseudonyme inconnu";	
+				require($rep.$vues['seconnecter']);
+			}
+			elseif($reponse=="ErrMdp") {
+				$message['ERR_MDP'] = "Mot de passe incorrect";
+				require($rep.$vues['seconnecter']);
+			}
+			else{
+				var_dump($_SESSION['role']);
+			}
 		}else{
 			require($rep.$vues['seconnecter']);
 		}
@@ -94,10 +104,7 @@ class CtrlUtilisateur{
 			$mdp = $_POST['mdp'];
 			Verif::verif_str($pseudo);
 			Verif::verif_str($mdp);
-			
-			$model = new MdlListeTache();
-			
-			
+	
 		}else{
 			require($rep.$vues['nouveaucompte']);
 		}

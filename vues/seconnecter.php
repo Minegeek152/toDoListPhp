@@ -20,9 +20,17 @@
 <div class="d-flex justify-content-center">
 <form action="index.php?action=seconnecter" method="post">
 <p>
+	<?php 
+		if(isset($message['ERR_PSEUDO'])) {?>
+		<p style="color:red"><?=$message['ERR_PSEUDO']?></p>
+	<?php }?>
 <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required />
 </p>
 <p>
+	<?php 
+		if(isset($message['ERR_MDP'])) {?>
+		<p style="color:red"><?=$message['ERR_MDP']?></p>
+	<?php }?>
 <input type="password" id="mdp" name="mdp" placeholder="Mot de passe" required />
 </p>
 <button type="submit" class="btn btn-success">Valider</button>
