@@ -7,7 +7,7 @@ class FrontCtrl{
 			global $rep,$vues;
 			$message=[];
 
-			session_start();			
+					
 			
 			$liste_actions_Membre = ['sedeconnecter','affichertoutesleslistes','ajouterlistepriv','modifierlistepriv','supprimerlistepriv','recherchertoutesleslistes'];
 

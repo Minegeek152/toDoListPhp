@@ -14,7 +14,7 @@
 				return "ErrPseudo";	
 			}
 			else{
-				$password = $results->getPseudo();
+				$password = $results->getMdp();
 				if(password_verify($mdp,$password)){
 					$_SESSION['role']='membre';
 					$_SESSION['login']=$pseudo;	
@@ -22,8 +22,7 @@
 					return "ErrMdp";
 				}
 			}
-			
-			return "ok";
+
 		}	
 	
 		public function deconnexion(){
@@ -59,6 +58,13 @@
 		}
 	
 		public function newMembre($pseudo,$mdp){
+			global $dns,$user,$pass,$message;
+			$con = new Connection($dns,$user,$pass);
+			//verif
+			$memberGateway = new MembreGateway($con);
+			if($memberGateway->findByPseudo($pseudo)!=NULL){
+				return "ErrPseudoExist";
+			}
 			$membre = new Membre($pseudo,$mdp);
 			$memberGateway->newMembre($membre);
 		}

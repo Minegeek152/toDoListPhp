@@ -30,6 +30,8 @@ class MembreGateway{
 	}
 
 	public function newMembre(Membre $user){
+
+
 		$pseudo=$user->getPseudo();
 		$mdp=password_hash($user->getMdp(), PASSWORD_DEFAULT);
 		$query='INSERT into Membre value(NULL,:name,:mdp)';

@@ -90,7 +90,7 @@ class CtrlUtilisateur{
 				require($rep.$vues['seconnecter']);
 			}
 			else{
-				var_dump($_SESSION['role']);
+				
 			}
 		}else{
 			require($rep.$vues['seconnecter']);
@@ -104,7 +104,14 @@ class CtrlUtilisateur{
 			$mdp = $_POST['mdp'];
 			Verif::verif_str($pseudo);
 			Verif::verif_str($mdp);
-	
+			
+			$model = new MdlMembre();
+			$reponse=$model->newMembre($pseudo,$mdp);
+			if($reponse=="ErrPseudoExist"){
+				$message['ERR_PSEUDO_EXIST'] = "Pseudo déjà pris";
+				require($rep.$vues['nouveaucompte']);
+			}
+
 		}else{
 			require($rep.$vues['nouveaucompte']);
 		}
