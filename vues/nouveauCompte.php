@@ -39,5 +39,8 @@
 </body>
 
 <?php include("footer.html");?>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a9da1f2a4524bc3f14e69ed6b7415ad31ac6cb2b
 </html>

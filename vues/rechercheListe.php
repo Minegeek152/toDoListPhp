@@ -9,27 +9,7 @@
 </head>
 
 <body>
-<header>
-
-<div>
-<div class="p-3 mb-2 bg-success text-white">
-<div class="d-flex justify-content-center">
-<h1 class="display-6">What To Do ?</h1>
-</div>
-
-<div class="d-flex justify-content-center">
-<nav>
-<ul class="nav nav-tabs">
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=">Accueil</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=seconnecter">Se connecter</a> </li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=ajouterlistepublique">Cr&eacute;er une liste</a></li>
-<li class="nav-item"> <a class="nav-link" style="color : white;" href="index.php?action=rechercherliste">Rechercher une liste</a></li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
-</header>
+<?php include("header.html");?>
 
 <div class="ventre">
 
@@ -49,14 +29,5 @@
 </div>
 </body>
 
-<footer>
-<div class="p-3 mb-2 bg-success text-white">
-<div class="d-flex justify-content-center">
-<p class="iep">Sophia Solignac - Lou Labussiere</p>
-</div>
-<div class="d-flex justify-content-center">
-<p>Groupe 8</p>
-</div>
-</div>
-</footer>
+<?php include("footer.html");?>
 </html>
