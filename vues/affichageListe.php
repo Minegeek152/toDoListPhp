@@ -43,16 +43,18 @@
     				</div>
     				<div class="col">
       				<div class="form-check">
-							<form>
-  								<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-  								<label class="form-check-label" for="flexCheckChecked"><?=$complete?></label>
+							<form action="index.php?action=completertache" method="post">
+								<input type="hidden" id="nom_liste" name="nom_liste" value="<?=$nom_liste?>"/>  
+								<input type="hidden" id="nom_tache" name="nom_tache" value="<?=$nom_tache?>"/>
+								<button type="submit" class="btn btn-success"><?=$complete?></button>
   							</form>
 						</div>
     				</div>
     				<div class="col">
-     					<form action="" method="POST">
+     					<form action="index.php?action=supprimertache" method="POST">
+     						<input type="hidden" id="nom_liste" name="nom_liste" value="<?=$nom_liste?>"/> 
 							<input type="hidden" id="nom_tache" name="nom_tache" value="<?=$nom_tache?>"/>
-							<button type="submit" class="btn btn-success">Supprimer</button>
+							<button type="submit" class="btn btn-success">X</button>
 						</form>
     				</div>
   				</div>

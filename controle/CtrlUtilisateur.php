@@ -23,12 +23,12 @@ class CtrlUtilisateur{
 					case 'ajoutertache' :
 						$this->ajouterTache($message);
 						break;
-					/*case 'completertache' :
-						$this->($message);
+					case 'completertache' :
+						$this->completerTache($message);
 						break;
 					case 'supprimertache' :
-						$this->($message);
-						break;*/
+						$this->supprimerTache($message);
+						break;
 					case 'ajouterlistepublique' :
 						$this->ajouterListePublique($message);
 						break;
@@ -219,6 +219,47 @@ class CtrlUtilisateur{
 		
 	}
 	
+	function completerTache($message){
+		global $rep,$vues;
+		if(isset($_POST['nom_tache']) && isset($_POST['nom_liste'])){
+			$nom_tache = $_POST['nom_tache'];
+			$nom_liste = $_POST['nom_liste'];
+			Verif::verif_str($nom_tache);
+			Verif::verif_str($nom_liste);
+			
+			$modele = new MdlListeTache();
+			$liste = $modele->findListeByNom($nom_liste);
+			$idliste = $liste->getIdListe();
+				
+			$modele->completeToggleTache($nom_tache,$idliste);
+				
+			$taches = $modele->findTachesByIdListe($idliste);
+			require($rep.$vues['affichageliste']);
+		}
+	}
+		
+	function supprimerTache($message){
+		global $rep, $vues;
+		if(isset($_POST['nom_tache']) && isset($_POST['nom_liste'])){
+			$nom_tache = $_POST['nom_tache'];
+			$nom_liste = $_POST['nom_liste'];
+			Verif::verif_str($nom_tache);
+			Verif::verif_str($nom_liste);
+			
+			$modele = new MdlListeTache();
+			$liste = $modele->findListeByNom($nom_liste);
+			$idliste = $liste->getIdListe();
+				
+			$modele->deleteTache($nom_tache,$idliste);
+				
+			$taches = $modele->findTachesByIdListe($idliste);
+			require($rep.$vues['affichageliste']);
+		}else{
+			$this->Reinit();
+		}
+			
+	
+	}
 	function supprimerListe($message){
 		global $rep, $vues;
 		if(isset($_POST['nom_liste'])){

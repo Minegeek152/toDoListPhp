@@ -34,6 +34,9 @@ class MdlListeTache{
 	}
 	
 	function completeToggleTache ($intitule, $idListe){
+		global $dns,$user,$pass;
+		$con = new Connection($dns,$user,$pass);
+		$taskGateway = new TacheGateway($con);
 		$tache = new Tache($intitule,$idListe);
 		$taskGateway->completeToggleTache($tache);
 	}
