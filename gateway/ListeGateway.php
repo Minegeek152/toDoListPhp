@@ -18,7 +18,7 @@ class ListeGateway{
 		return $Listes;
 	}
 	
-	public function findById(int $id) : Liste{
+	public function findById(int $id) {
 		$query = "SELECT * FROM Liste WHERE idListe = :id";
 		$this->con->executeQuery($query,array(':id'=>array($id,PDO::PARAM_INT)));
 		
@@ -63,7 +63,6 @@ class ListeGateway{
 	public function updateListeNom(Liste $list, string $nom){
 		
 		$idListe=$list->getIdListe();
-
 		$query = "UPDATE Liste SET nom = :nom WHERE idListe = :id";
 		$this->con->executeQuery($query,array(
 			':nom'=>array($nom,PDO::PARAM_STR),
@@ -72,7 +71,6 @@ class ListeGateway{
 	
 	public function deleteListe(Liste $list){
 		$idListe=$list->getIdListe();
-
 		$query = "DELETE FROM Liste WHERE idListe = :id";
 		$this->con->executeQuery($query,array(
 		':id'=>array($idListe,PDO::PARAM_INT)));

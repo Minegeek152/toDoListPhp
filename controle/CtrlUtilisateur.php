@@ -4,7 +4,9 @@ class CtrlUtilisateur{
 	public function __construct($action){
 		global $rep, $vues, $message;
 		try{
+
 			switch($action){
+
 					case NULL : //pas d'action, on appelle vue principale
 						$this->Reinit();
 						break;
@@ -37,6 +39,7 @@ class CtrlUtilisateur{
 						break;
 					case 'supprimerliste' :
 						$this->supprimerListe($message);
+
 						break;
 					
 					default:
@@ -282,7 +285,7 @@ class CtrlUtilisateur{
 				$nom_tache = $unetache->getIntitule();
 				$modele->deleteTache($nom_tache,$id);
 			}
-			deleteListe($nom_liste,1);
+			$modele->deleteListe($nom_liste,1,$id);
 			$this->Reinit();//marche pas
 		}else{
 			$this->Reinit();

@@ -95,12 +95,12 @@ class MdlListeTache{
 		$listGateway->updateListeNom($liste,$nouv_nom);
 	}
 	
-	function deleteListe($nom, $idMembre){
+	function deleteListe($nom, $idMembre, $id){
 		global $dns, $user, $pass;
 		$con = new Connection($dns,$user,$pass);
 		$listGateway = new ListeGateway($con);
-		$liste = new Liste($nom, $idMembre);
-		$listGateway->updateListeNom($liste,$nom);
+		$liste = new Liste($nom, $idMembre,$id);
+		$listGateway->deleteListe($liste);
 	}
 	
 	
