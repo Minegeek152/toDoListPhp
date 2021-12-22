@@ -41,11 +41,11 @@ class MdlListeTache{
 		$taskGateway->completeToggleTache($tache);
 	}
 	
-	function deleteTache($intitule, $idListe){
+	function deleteTache($intitule, $idListe, $complete, $idTache){
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$taskGateway = new TacheGateway($con);
-		$tache = new Tache($intitule,$idListe);
+		$tache = new Tache($intitule,$idListe,$complete,$idTache);
 		$taskGateway->deleteTache($tache);
 	}
 	

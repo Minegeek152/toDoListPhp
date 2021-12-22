@@ -116,10 +116,9 @@ class TacheGateWay{
 	
 	public function deleteTache(Tache $task){
 		$idtache=$task->getIdTache();
-
 		$query = "DELETE FROM Tache WHERE idTache = :id";
-		$this->con->executeQuery($query,array('
-			:id'=>array($idtache,PDO::PARAM_INT)));
+		$this->con->executeQuery($query,array(
+			':id'=>array($idtache,PDO::PARAM_INT)));
 	}
 }
 ?>

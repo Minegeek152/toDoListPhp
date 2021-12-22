@@ -50,12 +50,12 @@ class CtrlUtilisateur{
 			}
 		}
 		catch(PDOException $e){
-			$message[]="Erreur inattendue";
+			$message[]="Erreur inattendue : ".$e;
 			require($rep.$vues['erreur']);
 	
 		}
 		catch(Exception $e2){
-			$message[]="Erreur inattendue";
+			$message[]="Erreur inattendue : ".$e2;
 			require($rep.$vues['erreur']);
 		}
 		
@@ -278,14 +278,16 @@ class CtrlUtilisateur{
 			
 			$modele = new MdlListeTache();		
 			$liste = $modele->findListeByNom($nom_liste);
-			$id = $liste->getIdListe();
-			$taches = $modele->findTachesByIdListe($id);
+			$id_liste = $liste->getIdListe();
+			$taches = $modele->findTachesByIdListe($id_liste);
 			
 			foreach($taches as $unetache){
 				$nom_tache = $unetache->getIntitule();
-				$modele->deleteTache($nom_tache,$id);
+				$complete=$unetache->isComplete();
+				$id_tache=$unetache->getIdTache();
+				$modele->deleteTache($nom_tache,$id_liste,$complete,$id_tache);
 			}
-			$modele->deleteListe($nom_liste,1,$id);
+			$modele->deleteListe($nom_liste,1,$id_liste);
 			$this->Reinit();//marche pas
 		}else{
 			$this->Reinit();
