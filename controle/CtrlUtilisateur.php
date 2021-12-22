@@ -90,7 +90,7 @@ class CtrlUtilisateur{
 				require($rep.$vues['seconnecter']);
 			}
 			else{
-				
+				$this->Reinit();
 			}
 		}else{
 			require($rep.$vues['seconnecter']);
@@ -111,7 +111,9 @@ class CtrlUtilisateur{
 				$message['ERR_PSEUDO_EXIST'] = "Pseudo déjà pris";
 				require($rep.$vues['nouveaucompte']);
 			}
-
+			else{
+				$this->Reinit();
+			}
 		}else{
 			require($rep.$vues['nouveaucompte']);
 		}
@@ -119,8 +121,13 @@ class CtrlUtilisateur{
 	
 	function affichageListe($message){
 		global $rep, $vues;
-		if(isset($_POST['nom'])){
-			$nom_liste = $_POST['nom'];
+		if(isset($_POST['nom']) || isset($_POST['nouv_nom'])){
+			if(isset($_POST['nom'])){
+				$nom_liste=$_POST['nom'];
+			}
+			if(isset($_POST['nouv_nom'])){
+				$nom_liste=$_POST['nouv_nom'];
+			}
 			Verif::verif_str($nom_liste);
 			
 			$modele = new MdlListeTache();
@@ -176,7 +183,7 @@ class CtrlUtilisateur{
 
 	function modifierListe($message){
 		global $rep, $vues;
-		if(isset($_POST['nouv_nom']) && isset($_POST['nom_liste'])){
+		if(isset($_POST['nouv_nom']) && isset($_POST['nom_liste'])) {
 			$nouv_nom = $_POST['nouv_nom'];
 			$nom_liste = $_POST['nom_liste'];
 			
@@ -190,7 +197,7 @@ class CtrlUtilisateur{
 			$modele->updateListeNom($nom_liste, 1, $nouv_nom);
 			
 			$taches = $modele->findTachesByIdListe($id);
-			require($rep.$vues['affichageliste']);
+			$this->affichageListe($message);
 		}else{
 			$this->Reinit();
 		}
