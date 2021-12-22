@@ -66,7 +66,7 @@ class CtrlUtilisateur{
 		global $rep, $vues;
 	
 		$modele = new MdlListeTache();
-		$listes = $modele->getAllListes();
+		$listes = $modele->findListeByIdMembre(1);
 		foreach($listes as $row){
 			$id=$row->getIdListe();
 			$taches[] = $modele->findTachesByIdListe($id);
@@ -259,7 +259,8 @@ class CtrlUtilisateur{
 			$modele = new MdlListeTache();
 			$liste = $modele->findListeByNom($nom_liste);
 			$idliste = $liste->getIdListe();
-				
+			
+			
 			$modele->deleteTache($nom_tache,$idliste);
 				
 			$taches = $modele->findTachesByIdListe($idliste);

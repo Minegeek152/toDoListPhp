@@ -75,7 +75,10 @@ class MdlListeTache{
 	}
 	
 	function findListeByIdMembre($idmembre) : array {
-		$array_listes[] = $listGateway->findByIdMembre($idmembre);
+		global $dns, $user, $pass;
+		$con = new Connection($dns,$user,$pass);
+		$listGateway = new ListeGateway($con);
+		$array_listes = $listGateway->findByIdMembre($idmembre);
 		return $array_listes;
 	}
 	

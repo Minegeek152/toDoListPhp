@@ -7,24 +7,13 @@ class CtrlMembre{
 			
 		try{
 			switch($action){
-					/*case 'sedeconnecter' :
-						$this->($message);
+					case 'sedeconnecter' :
+						$this->seDeconnecter($message);
 						break;
-					case 'recherchertoutesleslistes' :
+					/*case 'listesprivees' :
 						$this->rechercheListe($message);
 						break;
-					case 'affichertoutesleslistes' :
-						$this->($message);
-						break;
-					case 'ajouterlistepriv' :
-						$this->($message);
-						break;
-					case 'modifierlistepriv' :
-						$this->($message);
-						break;
-					case 'supprimerlistepriv' :
-						$this->($message);
-						break;*/
+					*/
 						
 					default:
 						$message[]="Erreur appel php!";
@@ -34,18 +23,26 @@ class CtrlMembre{
 			}
 		}
 		catch(PDOException $e){
-			$message[]="Erreur inattendue";
+			$message[]="Erreur PDO inattendue => ".$e;
 			require($rep.$vues['erreur']);
 	
 		}
 		catch(Exception $e2){
-			$message[]="Erreur inattendue";
+			$message[]="Erreur inattendue => ".$e2;
 			require($rep.$vues['erreur']);
 		}
 		
 		exit(0);
 	}
 
-	
+	function seDeconnecter($message){
+		global $rep,$vues;
+		
+		$modele = new MdlMembre();
+		
+		$modele->deconnexion();
+		
+		
+	}
 }
 ?>

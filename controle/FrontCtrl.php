@@ -7,9 +7,7 @@ class FrontCtrl{
 			global $rep,$vues;
 			$message=[];
 
-					
-			
-			$liste_actions_Membre = ['sedeconnecter','affichertoutesleslistes','ajouterlistepriv','modifierlistepriv','supprimerlistepriv','recherchertoutesleslistes'];
+			$liste_actions_Membre = ['sedeconnecter','listesprivees'];
 
 			if(isset($_REQUEST['action'])){
 				$action = $_REQUEST['action'];			
