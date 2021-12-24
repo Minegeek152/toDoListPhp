@@ -17,7 +17,8 @@
 				$password = $results->getMdp();
 				if(password_verify($mdp,$password)){
 					$_SESSION['role']='membre';
-					$_SESSION['login']=$pseudo;	
+					$_SESSION['login']=$pseudo;
+					$_SESSION['mdp']=$password;
 				}else{
 					return "ErrMdp";
 				}
@@ -32,13 +33,13 @@
 		}
 		
 		public function isMembre() {
-			if(isset($_SESSION['role']) && isset($_SESSION['pseudo']) && isset($_SESSION['mdp'])) {
+			if(isset($_SESSION['role']) && isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
 				if($_SESSION['role']!='membre') return NULL;
 			
-				Verif::verif_str($_SESSION['pseudo']);
+				Verif::verif_str($_SESSION['login']);
 				Verif::verif_str($_SESSION['mdp']);
 			
-				return new Membre($_SESSION['pseudo'],$_SESSION['mdp']);
+				return new Membre($_SESSION['login'],$_SESSION['mdp']);
 			}else return NULL;	
 		}
 		
@@ -48,12 +49,15 @@
 		}
 	
 		public function findMembreByPseudo($pseudo) : Membre {
-			$membre = $memberGateway->findByPseudo($pseudo);
+			global $dns,$user,$pass;
+			$con = new Connection($dns,$user,$pass);
+			$membreGateway = new MembreGateway($con);
+			$membre = $membreGateway->findByPseudo($pseudo);
 			return $membre;
 		}
 	
 		public function findMembreById($id) : Membre {
-			$membre = $memberGateway->findById($id);
+			$membre = $membreGateway->findById($id);
 			return $membre;
 		}
 	
@@ -61,22 +65,22 @@
 			global $dns,$user,$pass,$message;
 			$con = new Connection($dns,$user,$pass);
 			//verif
-			$memberGateway = new MembreGateway($con);
-			if($memberGateway->findByPseudo($pseudo)!=NULL){
+			$membreGateway = new MembreGateway($con);
+			if($membreGateway->findByPseudo($pseudo)!=NULL){
 				return "ErrPseudoExist";
 			}
 			$membre = new Membre($pseudo,$mdp);
-			$memberGateway->newMembre($membre);
+			$membreGateway->newMembre($membre);
 		}
 	
 		public function updateMembrePseudo($pseudo,$mdp, $nouv_pseudo){
 			$membre = new Membre($pseudo,$mdp);
-			$memberGateway->updateMembrePseudo($membre,$nouv_pseudo);	
+			$membreGateway->updateMembrePseudo($membre,$nouv_pseudo);	
 		}
 	
 		public function deleteMembre($pseudo,$mdp){
 			$membre = new Membre($pseudo,$mdp);
-			$memberGateway->deleteMembre($membre);	
+			$membreGateway->deleteMembre($membre);	
 		}
 	
 	}

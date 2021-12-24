@@ -7,7 +7,7 @@ class FrontCtrl{
 			global $rep,$vues;
 			$message=[];
 
-			$liste_actions_Membre = ['sedeconnecter','listesprivees'];
+			$liste_actions_Membre = ['sedeconnecter','listesprivees','ajouterlisteconnecte','toutesleslistes'];
 
 			if(isset($_REQUEST['action'])){
 				$action = $_REQUEST['action'];			
@@ -21,7 +21,7 @@ class FrontCtrl{
 					require($rep.$vues['seconnecter']);	
 				}
 				else {
-					$ctrl_membre = new CtrlMembre();
+					$ctrl_membre = new CtrlMembre($action);
 				}
 			}else{
 				$ctrl_utilisateur = new CtrlUtilisateur($action);
