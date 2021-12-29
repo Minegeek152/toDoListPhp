@@ -38,14 +38,19 @@
 		foreach($taches as $tachesbyid){
 			foreach($tachesbyid as $unetache){
 				if($unetache->getIdListe() == $uneliste->getIdListe()){
+					$nom_tache=$unetache->getIntitule();
 					if($unetache->isComplete()){
-						$complete='done';
+						$complete='uncheck';
 					}
-					else $complete ='not done yet';
+					else $complete ='check';
 				
 		?>
-					<p><?=$unetache->getIntitule().'	->	'.$complete ?></p>		
-		<?php
+				<?php if($complete=='uncheck'){?> <del><?php }?>
+    					
+      					<p><?=$nom_tache?></p>
+
+      				<?php if($complete=='uncheck'){?> </del><?php }	
+
 				}
 			}
 		}
