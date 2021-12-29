@@ -152,17 +152,41 @@ class CtrlUtilisateur{
 			Verif::verif_str($nom_liste);
 			
 			$modele = new MdlListeTache();
-			try{
-				$liste = $modele->findListeByNom($nom_liste);
+
+			$liste = $modele->findListeByNom($nom_liste);
+
+			if($liste != NULL){
 				$id = $liste->getIdListe();
-			
+				$idMembreList=$liste->getIdMembre();
+				if($idMembreList != 1){
+					if(isset($_SESSION['login'])){
+
+						$modeleMembre= new MdlMembre();
+						$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
+						$idMembre=$membre->getId();
+						if($idMembre != $idMembreList){
+							$message['ERR_LIST']="Liste inconnue";
+						}
+					}
+					else{
+						$message['ERR_LIST']="Liste inconnue";
+					}
+				}
+
+
+				
+
+			}else{
+				$message['ERR_LIST']="Liste inconnue";
+			}
+
+			if(!empty($message)){
+				require $rep.$vues['rechercherliste'];
+			}else{
 				$taches = $modele->findTachesByIdListe($id);
 				require($rep.$vues['affichageliste']);
 			}
-			catch(PDOException $e){
-			$message[]="Erreur!! ".$e;
-			require($rep.$vues['erreur']);
-			}
+
 		}else{
 			require($rep.$vues['rechercherliste']);
 		}
@@ -261,7 +285,7 @@ class CtrlUtilisateur{
 			$idliste = $liste->getIdListe();
 			
 			
-			$modele->deleteTache($nom_tache,$idliste);
+			$modele->deleteTache($nom_tache);
 				
 			$taches = $modele->findTachesByIdListe($idliste);
 			require($rep.$vues['affichageliste']);

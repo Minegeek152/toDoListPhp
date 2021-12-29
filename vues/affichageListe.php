@@ -44,7 +44,11 @@
     		<div class="container">
   				<div class="row">
     				<div class="col">
-      				<p><?=$nom_tache?></p>
+    					<?php if($complete=='uncheck'){?> <del><?php }?>
+    					
+      					<p><?=$nom_tache?></p>
+
+      				<?php if($complete=='uncheck'){?> </del><?php }?>
     				</div>
     				<div class="col">
       				<div class="form-check">

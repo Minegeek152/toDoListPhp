@@ -24,8 +24,12 @@
 
 <div class="d-flex justify-content-center">
 <form action="index.php?action=rechercherliste" method="POST">
+		<?php 
+		if(isset($message['ERR_LIST'])) {?>
+		<p style="color:red"><?=$message['ERR_LIST']?></p>
+	<?php }?>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" id="nom" name="nom" placeholder="Rechercher une liste"/>
+	  <input type="text" class="form-control" id="nom" name="nom" placeholder="Rechercher une liste"/>	
   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
 </div>
 </form>

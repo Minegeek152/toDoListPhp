@@ -17,7 +17,7 @@ class MdlListeTache{
 		return $tache;
 	}
 	
-	function findTachesByIdListe($idListe) : array {
+	function findTachesByIdListe($idListe){
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$taskGateway = new TacheGateway($con);
@@ -33,24 +33,24 @@ class MdlListeTache{
 		$taskGateway->newTache($tache);
 	}
 	
-	function completeToggleTache ($intitule, $idListe){
+	function completeToggleTache ($intitule){
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$taskGateway = new TacheGateway($con);
-		$tache = new Tache($intitule,$idListe);
+		$tache=$taskGateway->findByNom($intitule);
 		$taskGateway->completeToggleTache($tache);
 	}
 	
-	function deleteTache($intitule, $idListe, $complete, $idTache){
+	function deleteTache($intitule){
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$taskGateway = new TacheGateway($con);
-		$tache = new Tache($intitule,$idListe,$complete,$idTache);
+		$tache=$taskGateway->findByNom($intitule);
 		$taskGateway->deleteTache($tache);
 	}
 	
 //fonctions pour les listes
-	function getAllListes() : array {
+	function getAllListes() {
 		global $dns, $user, $pass;
 		$con = new Connection($dns,$user,$pass);
 		$listGateway = new ListeGateway($con);
@@ -58,12 +58,12 @@ class MdlListeTache{
 		return $array_listes;
 	}
 	
-	function findListeById($id) : Liste {
+	function findListeById($id){
 		$liste = findById($id);
 		return $liste;
 	}
 	
-	function findListeByNom($nom) : Liste {
+	function findListeByNom($nom){
 		global $dns, $user, $pass;
 		$con = new Connection($dns,$user,$pass);
 		$listGateway = new ListeGateway($con);
@@ -74,11 +74,12 @@ class MdlListeTache{
 		return $liste;
 	}
 	
-	function findListeByIdMembre($idmembre) : array {
+	function findListeByIdMembre($idmembre) {
 		global $dns, $user, $pass;
 		$con = new Connection($dns,$user,$pass);
 		$listGateway = new ListeGateway($con);
 		$array_listes = $listGateway->findByIdMembre($idmembre);
+		if ($array_listes==NULL) return array();
 		return $array_listes;
 	}
 	

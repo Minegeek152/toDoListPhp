@@ -6,7 +6,7 @@ class ListeGateway{
 		$this->con = $con;
 	}
 	
-	public function getAllListe() : array{
+	public function getAllListe() {
 		$query="SELECT * FROM Liste";
 	
 		$this->con->executeQuery($query,array());
@@ -37,11 +37,12 @@ class ListeGateway{
 			return new Liste($row['nom'],$row['idMembre'],$row['idListe']);
 	}
 	
-	public function findByIdMembre($id) : array {
+	public function findByIdMembre($id){
 		$query = "SELECT * FROM Liste WHERE idMembre = :id";
 		$this->con->executeQuery($query,array(':id'=>array($id,PDO::PARAM_INT)));
 		
 		$results = $this->con->getResults();
+		$Listes=NULL;
 		foreach($results as $row){
 			$Listes[] = new Liste($row['nom'],$row['idMembre'],$row['idListe']);
 		}

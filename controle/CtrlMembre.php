@@ -7,19 +7,19 @@ class CtrlMembre{
 			
 		try{
 			switch($action){
-					/*case 'toutesleslistes' :
+					case 'toutesleslistes' :
 						$this->toutesLesListes($message);
-						break;*/
+						break;
 					case 'sedeconnecter' :
 						$this->seDeconnecter($message);
 						break;
 					case 'ajouterlisteconnecte' :
 						$this->ajouterListeConnecte($message);
 						break;
-					/*case 'listesprivees' :
-						$this->rechercheListe($message);
+					case 'listesprivees' :
+						$this->listesPrivees($message);
 						break;
-					*/
+					
 						
 					default:
 						$message[]="Erreur appel php!";
@@ -42,10 +42,36 @@ class CtrlMembre{
 	}
 
 	function toutesLesListes($message){
-	//a completer
+		global $rep, $vues;
+	
+		$modele = new MdlListeTache();
+		$modeleMembre = new MdlMembre();
+		$listes = $modele->findListeByIdMembre(1);
+		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
+		$listes = array_merge($listes,$modele->findListeByIdMembre($membre->getId()));
+		foreach($listes as $row){
+			$id=$row->getIdListe();
+			$taches[] = $modele->findTachesByIdListe($id);
+		}
+		require($rep.$vues['accueil']);
 	
 	}
 	
+	function listesPrivees($message){
+		global $rep, $vues;
+	
+		$modele = new MdlListeTache();
+		$modeleMembre = new MdlMembre();
+		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
+		$listes = $modele->findListeByIdMembre($membre->getId());
+		foreach($listes as $row){
+			$id=$row->getIdListe();
+			$taches[] = $modele->findTachesByIdListe($id);
+		}
+		require($rep.$vues['accueil']);
+
+	}
+
 	function seDeconnecter($message){
 		global $rep,$vues;
 		
