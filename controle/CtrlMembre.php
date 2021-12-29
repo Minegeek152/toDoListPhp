@@ -102,19 +102,25 @@ class CtrlMembre{
 
 			if($choix_liste == 'privee'){
 				$modeleMembre = new MdlMembre();
-				
-				$membre = $modeleMembre->findMembreByPseudo($login);
-				
-				$idmembre = $membre->getId();
-				
-				$modeleListeTache->newListe($nom_liste,$idmembre);
+				$membre = $modeleMembre->findMembreByPseudo($login);			
+				$idmembre = $membre->getId();		
 			}			
 			else{
-				
-				$modeleListeTache->newListe($nom_liste,1);//1 c'est le 'membre' utilisateur
+				$idmembre = 1;//1 c'est le 'membre' utilisateur
 			}
-			//$this->affichageListe($message);
-			require($rep.$vues['nouvelleliste_connecte']);
+			$liste = $modeleListeTache->findListeByNomAndMembre($nom_liste,$idmembre);
+			if($liste != NULL){
+				$message['ERR_NOM_EXIST'] = "Ce nom est déjà pris";
+				require($rep.$vues['nouvelleliste_connecte']);
+			}
+			else{
+				$modeleListeTache->newListe($nom_liste,$idmembre);
+				
+				$liste = $modeleListeTache->findListeByNomAndMembre($nom_liste,$idmembre);
+				$id = $liste->getIdListe();
+				$taches = $modeleListeTache->findTachesByIdListe($id);
+				require($rep.$vues['affichageliste']);
+			}
 		}else{
 			require($rep.$vues['nouvelleliste_connecte']);
 		}

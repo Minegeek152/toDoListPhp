@@ -50,6 +50,19 @@ class ListeGateway{
 		
 	}
 	
+	public function findByNomAndMembre($nom,$id){
+		$query = "SELECT * FROM Liste WHERE nom = :nom AND idMembre = :id";
+		$this->con->executeQuery($query,array(':id'=>array($id,PDO::PARAM_INT),':nom'=>array($nom,PDO::PARAM_STR)));
+		
+		$results = $this->con->getResults();
+		if(empty($results)) return NULL;
+		else{
+			foreach($results as $row){
+				return new Liste($row['nom'],$row['idMembre'],$row['idListe']);
+			}
+		}		
+	}
+	
 	public function newListe(Liste $list){
 		$nom=$list->getNom();
 		$idMembre=$list->getIdMembre();

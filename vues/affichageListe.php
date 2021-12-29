@@ -27,9 +27,12 @@
 <form action="index.php?action=modifierliste" method="POST">
 <div class="input-group mb-3">
   <input type="text" class="form-control" id="nouv_nom" name="nouv_nom" placeholder="Modifier le nom de la liste"/>
-  <input type="hidden" id="nom_liste" name="nom_liste" value="<?=$nom_liste?>"/> 
+  <input type="hidden" id="nom" name="nom" value="<?=$nom_liste?>"/> 
   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
-
+	<?php 
+		if(isset($message['ERR_NOM_EXIST'])) {?>
+		<p style="color:red"><?=$message['ERR_NOM_EXIST']?></p>
+	<?php }?>
 </div>
 </form>
 <?php

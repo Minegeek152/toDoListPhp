@@ -198,10 +198,19 @@ class CtrlUtilisateur{
 			$nom_liste = $_POST['nom'];
 			Verif::verif_str($nom_liste);
 			
-			$model = new MdlListeTache();
-			$model->newListe($nom_liste,1);//1 c'est le 'membre' utilisateur
+			$modele = new MdlListeTache();
 			
-			$this->affichageListe($message);
+			$liste = $modele->findListeByNomAndMembre($nom_liste,1);//1 c'est le 'membre' utilisateur
+			if($liste != NULL){
+				$message['ERR_NOM_EXIST'] = "Ce nom est déjà pris";
+				require($rep.$vues['nouvelleliste']);
+			}
+			else{
+				$modele->newListe($nom_liste,1);//1 c'est le 'membre' utilisateur
+				
+				$this->affichageListe($message);
+			}
+			
 		}else{
 			require($rep.$vues['nouvelleliste']);
 		}
@@ -210,21 +219,37 @@ class CtrlUtilisateur{
 
 	function modifierListe($message){
 		global $rep, $vues;
-		if(isset($_POST['nouv_nom']) && isset($_POST['nom_liste'])) {
+		if(isset($_POST['nouv_nom']) && isset($_POST['nom'])) {
 			$nouv_nom = $_POST['nouv_nom'];
-			$nom_liste = $_POST['nom_liste'];
+			$nom_liste = $_POST['nom'];
 			
 			Verif::verif_str($nouv_nom);
 			Verif::verif_str($nom_liste);
 			$modele = new MdlListeTache();
 			
-			$liste = $modele->findListeByNom($nom_liste);
-			$id = $liste->getIdListe();
+			if(isset($_SESSION['login'])){
+				$modeleMembre = new MdlMembre();
+				$membre = $modeleMembre->findMembreByPseudo($login);			
+				$idmembre = $membre->getId();
+			}
+			else{
+				$idmembre = 1;//1 c'est le 'membre' utilisateur
+			}
+			$liste = $modele->findListeByNomAndMembre($nouv_nom,$idmembre);
+			if($liste != NULL){
+				$message['ERR_NOM_EXIST'] = "Ce nom est déjà pris";
+				unset($_POST['nouv_nom']);
+				$this->affichageListe($message);
+			}
+			else{
+				$liste = $modele->findListeByNomAndMembre($nom_liste,$idmembre);
+				$id = $liste->getIdListe();
+				
+				$modele->updateListeNom($nom_liste, $idmembre, $nouv_nom);
 			
-			$modele->updateListeNom($nom_liste, 1, $nouv_nom);
-			
-			$taches = $modele->findTachesByIdListe($id);
-			$this->affichageListe($message);
+				$taches = $modele->findTachesByIdListe($id);
+				$this->affichageListe($message);
+			}
 		}else{
 			$this->Reinit();
 		}

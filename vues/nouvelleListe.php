@@ -28,6 +28,10 @@
   <input type="text" class="form-control" id="nom" name="nom" placeholder="Créer une nouvelle liste"/>  
   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
 </div>
+<?php 
+		if(isset($message['ERR_NOM_EXIST'])) {?>
+		<p style="color:red"><?=$message['ERR_NOM_EXIST']?></p>
+	<?php }?>
 </form>
 </div>
 

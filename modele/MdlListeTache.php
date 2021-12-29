@@ -68,9 +68,6 @@ class MdlListeTache{
 		$con = new Connection($dns,$user,$pass);
 		$listGateway = new ListeGateway($con);
 		$liste = $listGateway->findByNom($nom);
-		if($liste == NULL){
-			
-		}
 		return $liste;
 	}
 	
@@ -81,6 +78,14 @@ class MdlListeTache{
 		$array_listes = $listGateway->findByIdMembre($idmembre);
 		if ($array_listes==NULL) return array();
 		return $array_listes;
+	}
+	
+	function findListeByNomAndMembre($nom,$idmembre) {
+		global $dns, $user, $pass;
+		$con = new Connection($dns,$user,$pass);
+		$listGateway = new ListeGateway($con);
+		$liste = $listGateway->findByNomAndMembre($nom,$idmembre);
+		return $liste;
 	}
 	
 	function newListe($nom, $idMembre){

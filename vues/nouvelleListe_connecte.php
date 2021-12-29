@@ -37,6 +37,10 @@
   <input type="hidden" name="login" value="<?=$_SESSION['login']?>"/> 
   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
 </div>
+<?php 
+		if(isset($message['ERR_NOM_EXIST'])) {?>
+		<p style="color:red"><?=$message['ERR_NOM_EXIST']?></p>
+	<?php }?>
 </form>
 </div>
 
