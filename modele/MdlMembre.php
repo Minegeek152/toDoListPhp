@@ -18,7 +18,6 @@
 				if(password_verify($mdp,$password)){
 					$_SESSION['role']='membre';
 					$_SESSION['login']=$pseudo;
-					$_SESSION['mdp']=$password;
 				}else{
 					return "ErrMdp";
 				}
@@ -33,13 +32,13 @@
 		}
 		
 		public function isMembre() {
-			if(isset($_SESSION['role']) && isset($_SESSION['login']) && isset($_SESSION['mdp'])) {
+			if(isset($_SESSION['role']) && isset($_SESSION['login'])) {
 				if($_SESSION['role']!='membre') return NULL;
 			
+				Verif::verif_str($_SESSION['role']);
 				Verif::verif_str($_SESSION['login']);
-				Verif::verif_str($_SESSION['mdp']);
-			
-				return new Membre($_SESSION['login'],$_SESSION['mdp']);
+				$membre = $this->findMembreByPseudo($_SESSION['login']);
+				return $membre;
 			}else return NULL;	
 		}
 		
