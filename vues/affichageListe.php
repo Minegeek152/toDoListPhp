@@ -36,13 +36,18 @@
 </div>
 </form>
 <?php
-	foreach($taches as $unetache){
-		$nom_tache = $unetache->getIntitule();
-		if($unetache->isComplete()){
-			$complete='uncheck';
-			}
-			else $complete ='check';
-    		?>
+	if(isset($message['ERR_NO_TASKS'])) {?>
+	<div class="d-flex justify-content-center">
+		<p style="color:red"><?=$message['ERR_NO_TASKS']?></p>
+	</div>
+<?php
+	}else{
+		foreach($taches as $unetache){
+			$nom_tache = $unetache->getIntitule();
+			if($unetache->isComplete()){
+				$complete='uncheck';
+			} else $complete ='check';
+?>
     	<div class="d-flex justify-content-center">	
     		<div class="container">
   				<div class="row">
@@ -74,7 +79,8 @@
 		</div>
 		
 	<?php 
-		} 
+		}
+	}
 	?>
 
 <div class="d-flex justify-content-center">

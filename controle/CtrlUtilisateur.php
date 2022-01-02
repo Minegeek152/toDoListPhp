@@ -67,11 +67,16 @@ class CtrlUtilisateur{
 	
 		$modele = new MdlListeTache();
 		$listes = $modele->findListeByIdMembre(1);
-		foreach($listes as $row){
-			$id=$row->getIdListe();
-			$taches[] = $modele->findTachesByIdListe($id);
+		if(empty($listes)){
+			$message['ERR_NO_LISTS'] = "Il n'y a pas encore de listes";
+			require($rep.$vues['accueil']);		
+		}else{
+			foreach($listes as $row){
+				$id=$row->getIdListe();
+				$taches[] = $modele->findTachesByIdListe($id);
+			}
+			require($rep.$vues['accueil']);
 		}
-		require($rep.$vues['accueil']);
 	}
 	
 	function seConnecter($message){
@@ -138,6 +143,9 @@ class CtrlUtilisateur{
 			$id = $liste->getIdListe();
 			
 			$taches = $modele->findTachesByIdListe($id);
+			if(empty($taches)){
+				$message['ERR_NO_TASKS']="Il n'y a pas encore de taches";	
+			}
 			require($rep.$vues['affichageliste']);
 		}else{
 			$this->Reinit();
@@ -338,7 +346,7 @@ class CtrlUtilisateur{
 				$modele->deleteTache($nom_tache,$id_liste,$complete,$id_tache);
 			}
 			$modele->deleteListe($nom_liste,1,$id_liste);
-			$this->Reinit();//marche pas
+			$this->Reinit();
 		}else{
 			$this->Reinit();
 		}

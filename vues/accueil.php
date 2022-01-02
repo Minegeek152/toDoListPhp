@@ -26,41 +26,38 @@
 <div class="toutes_les_listes">
 
 	<?php
-		foreach($listes as $uneliste){
-	?>
-    	<div class="une_liste">
-    	<form action="index.php?action=affichageListe" method="POST">
-    	<label for="nom" ></label>
-    	<input type="submit" id="nom" name="nom" value="<?=$uneliste->getNom()?>" />
-		<!--button class="btn btn-success" type="submit" id="nom" name="nom"><?=$uneliste->getNom()?></button-->   	
-    	<?php
-    	
-		foreach($taches as $tachesbyid){
-			foreach($tachesbyid as $unetache){
-				if($unetache->getIdListe() == $uneliste->getIdListe()){
-					$nom_tache=$unetache->getIntitule();
-					if($unetache->isComplete()){
-						$complete='uncheck';
-					}
-					else $complete ='check';
+		if(isset($message['ERR_NO_LISTS'])) {?>
+		<p style="color:red"><?=$message['ERR_NO_LISTS']?></p>
+	<?php 
+		}else{
+			foreach($listes as $uneliste){?>
+    		<div class="une_liste">
+    		<form action="index.php?action=affichageListe" method="POST">
+    		<label for="nom" ></label>
+    		<input type="submit" id="nom" name="nom" value="<?=$uneliste->getNom()?>" />
+    		<?php
+				foreach($taches as $tachesbyid){
+					foreach($tachesbyid as $unetache){
+						if($unetache->getIdListe() == $uneliste->getIdListe()){
+							$nom_tache=$unetache->getIntitule();
+								if($unetache->isComplete()){
+									$complete='uncheck';
+								} else $complete ='check';
 				
-		?>
-				<?php if($complete=='uncheck'){?> <del><?php }?>
-    					
-      					<p><?=$nom_tache?></p>
-
-      				<?php if($complete=='uncheck'){?> </del><?php }	
-
+			?>
+			<?php if($complete=='uncheck'){?> <del><?php }?>
+      	<p><?=$nom_tache?></p>
+			<?php if($complete=='uncheck'){?> </del><?php }	
+						}
+					}
 				}
-			}
-		}
-    	?>
-		
-    	</form>
-    	</div>
-		<?php
+    		?>
+    		</form>
+    		</div>
+			<?php
+		 	}
 		 }
-		?> 
+			?> 
 
 </div>
 </div>

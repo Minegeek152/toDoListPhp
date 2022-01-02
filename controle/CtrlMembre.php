@@ -49,12 +49,16 @@ class CtrlMembre{
 		$listes = $modele->findListeByIdMembre(1);
 		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
 		$listes = array_merge($listes,$modele->findListeByIdMembre($membre->getId()));
-		foreach($listes as $row){
-			$id=$row->getIdListe();
-			$taches[] = $modele->findTachesByIdListe($id);
-		}
-		require($rep.$vues['accueil']);
-	
+		if(empty($listes)){
+			$message['ERR_NO_LISTS'] = "Il n'y a pas encore de listes";
+			require($rep.$vues['accueil']);		
+		}else{
+			foreach($listes as $row){
+				$id=$row->getIdListe();
+				$taches[] = $modele->findTachesByIdListe($id);
+			}
+			require($rep.$vues['accueil']);
+		}	
 	}
 	
 	function listesPrivees($message){
@@ -64,12 +68,16 @@ class CtrlMembre{
 		$modeleMembre = new MdlMembre();
 		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
 		$listes = $modele->findListeByIdMembre($membre->getId());
-		foreach($listes as $row){
-			$id=$row->getIdListe();
-			$taches[] = $modele->findTachesByIdListe($id);
+		if(empty($listes)){
+			$message['ERR_NO_LISTS'] = "Il n'y a pas encore de listes";
+			require($rep.$vues['accueil']);		
+		}else{
+			foreach($listes as $row){
+				$id=$row->getIdListe();
+				$taches[] = $modele->findTachesByIdListe($id);
+			}
+			require($rep.$vues['accueil']);
 		}
-		require($rep.$vues['accueil']);
-
 	}
 
 	function seDeconnecter($message){
@@ -119,6 +127,9 @@ class CtrlMembre{
 				$liste = $modeleListeTache->findListeByNomAndMembre($nom_liste,$idmembre);
 				$id = $liste->getIdListe();
 				$taches = $modeleListeTache->findTachesByIdListe($id);
+				if(empty($taches)){
+					$message['ERR_NO_TASKS']="Il n'y a pas encore de taches";	
+				}
 				require($rep.$vues['affichageliste']);
 			}
 		}else{
