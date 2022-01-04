@@ -16,7 +16,7 @@
 	}
  ?>
 
-<div class="ventre">
+<div class="ventre" style="min-height: 400px;">
 
 <div class="d-flex justify-content-center">
 <h2 class="petit_titre">Cr&eacute;er une liste</h2>

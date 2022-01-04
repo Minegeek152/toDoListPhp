@@ -120,7 +120,7 @@ class CtrlUtilisateur{
 				require($rep.$vues['nouveaucompte']);
 			}
 			else{
-				$this->Reinit();
+				$this->seConnecter($message);
 			}
 		}else{
 			require($rep.$vues['nouveaucompte']);

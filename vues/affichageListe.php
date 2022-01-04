@@ -18,7 +18,7 @@
  ?>
 
 
-<div class="ventre">
+<div class="ventre" style="min-height: 400px;">
 
 <div class="d-flex justify-content-center">
 <h2 class="petit_titre"><?=$nom_liste?></h2>
@@ -29,11 +29,11 @@
   <input type="text" class="form-control" id="nouv_nom" name="nouv_nom" placeholder="Modifier le nom de la liste"/>
   <input type="hidden" id="nom" name="nom" value="<?=$nom_liste?>"/> 
   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Valider</button>
-	<?php 
-		if(isset($message['ERR_NOM_EXIST'])) {?>
-		<p style="color:red"><?=$message['ERR_NOM_EXIST']?></p>
-	<?php }?>
 </div>
+<?php 
+	if(isset($message['ERR_NOM_EXIST'])) {?>
+	<p style="color:red"><?=$message['ERR_NOM_EXIST']?></p>
+<?php }?>
 </form>
 <?php
 	if(isset($message['ERR_NO_TASKS'])) {?>
