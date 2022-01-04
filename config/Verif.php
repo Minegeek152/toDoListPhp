@@ -1,8 +1,6 @@
 <?php
 class Verif{
-	
-	 static function verifAction($action) {
-
+	static function verifAction($action) {
         if (!isset($action)) {
             throw new Exception('il n\'y a pas d\'action');
 			}
@@ -10,32 +8,27 @@ class Verif{
 		
 	static function verif_str(string $str){
 		global $message;
+	
 		if(!isset($str) || $str == ""){
 			$message[] = 'la chaîne de caractères est vide';
 		}
 		if($str != filter_var($str,FILTER_SANITIZE_STRING)){
 			$message[]='la chaîne de caractères n\'est pas valide';
-		}
-		
+		}		
 	}		
 		
 	static function verifCompte(string &$login, string &$mdp, &$message){
-		
 		//vérification du login
 		if(!isset($login) || $login==""){
-
 			$message[] = 'il faut renseigner un login';
 			$login="";
 		}
 		if($login != filter_var($login, FILTER_SANITIZE_STRING)){
-		
 			$message[] = 'le login n\'est pas valide';
 			$login="";
 		}
-
 		//vérification du mot de passe
 		if(!isset($mdp) || $mdp==""){
-
 			$message[] = 'il faut renseigner un mot de passe';
 			$mdp="";
 		}
@@ -46,7 +39,6 @@ class Verif{
 	}
 	
 	static function verifListe (string &$nom, &$message){	
-		
 		//vérification du nom de la tache
 		if(!isset($nom) || $nom==""){
 			$message[] = 'il faut renseigner un nom';
@@ -59,10 +51,8 @@ class Verif{
 	}
 	
 	static function verifTache(string &$intitule, &$message){
-		
 		//vérification du l'intitulé
 		if(!isset($intitule) || $intitule==""){
-
 			$message[] = 'il faut renseigner un intitule';
 			$intitule="";
 		}
@@ -71,7 +61,5 @@ class Verif{
 			$intitule="";
 		}
 	}
-	
 }
-
 ?>

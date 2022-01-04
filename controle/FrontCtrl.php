@@ -1,12 +1,9 @@
 <?php
 class FrontCtrl{
-	
 	function __construct(){
-		
 		try {
 			global $rep,$vues;
 			$message=[];
-
 			$liste_actions_Membre = ['sedeconnecter','listesprivees','ajouterlisteconnecte','toutesleslistes'];
 
 			if(isset($_REQUEST['action'])){
@@ -22,17 +19,14 @@ class FrontCtrl{
 				}
 				else {
 					$ctrl_membre = new CtrlMembre($action);
-					
 				}
 			}else{
 				$ctrl_utilisateur = new CtrlUtilisateur($action);
 			}
-
 		}catch(Exception $e){
 			$message[]="erreur inattendu!! => ".$e;
 			require($rep.$vues['erreur']);
 		}
 	}
 }
-
 ?>

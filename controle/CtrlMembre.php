@@ -1,43 +1,36 @@
 <?php
-
 class CtrlMembre{
-
 	function __construct($action){
 		global $rep, $vues, $message;
-			
 		try{
 			switch($action){
-					case 'toutesleslistes' :
-						$this->toutesLesListes($message);
-						break;
-					case 'sedeconnecter' :
-						$this->seDeconnecter($message);
-						break;
-					case 'ajouterlisteconnecte' :
-						$this->ajouterListeConnecte($message);
-						break;
-					case 'listesprivees' :
-						$this->listesPrivees($message);
-						break;
-					
-						
-					default:
-						$message[]="Erreur appel php!";
-						require($rep.$vues['accueil']);
-						break;
-						
+				case 'toutesleslistes' :
+					$this->toutesLesListes($message);
+					break;
+				case 'sedeconnecter' :
+					$this->seDeconnecter($message);
+					break;
+				case 'ajouterlisteconnecte' :
+					$this->ajouterListeConnecte($message);
+					break;
+				case 'listesprivees' :
+					$this->listesPrivees($message);
+					break;		
+				
+				default:
+					$message[]="Erreur appel php!";
+					require($rep.$vues['accueil']);
+					break;					
 			}
 		}
 		catch(PDOException $e){
 			$message[]="Erreur PDO inattendue => ".$e;
 			require($rep.$vues['erreur']);
-	
 		}
 		catch(Exception $e2){
 			$message[]="Erreur inattendue => ".$e2;
 			require($rep.$vues['erreur']);
 		}
-		
 		exit(0);
 	}
 
@@ -45,7 +38,9 @@ class CtrlMembre{
 		global $rep, $vues;
 	
 		$modele = new MdlListeTache();
+		
 		$modeleMembre = new MdlMembre();
+
 		$listes = $modele->findListeByIdMembre(1);
 		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
 		$listes = array_merge($listes,$modele->findListeByIdMembre($membre->getId()));
@@ -65,7 +60,9 @@ class CtrlMembre{
 		global $rep, $vues;
 	
 		$modele = new MdlListeTache();
+		
 		$modeleMembre = new MdlMembre();
+
 		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
 		$listes = $modele->findListeByIdMembre($membre->getId());
 		if(empty($listes)){
@@ -85,9 +82,9 @@ class CtrlMembre{
 		
 		$modeleMembre = new MdlMembre();
 		
-		$modeleMembre->deconnexion();
-		
 		$modeleListeTache = new MdlListeTache();
+		
+		$modeleMembre->deconnexion();
 		$listes = $modeleListeTache->findListeByIdMembre(1);
 		foreach($listes as $row){
 			$id=$row->getIdListe();
@@ -98,6 +95,7 @@ class CtrlMembre{
 	
 	function ajouterListeConnecte($message){
 		global $rep,$vues;
+		
 		if(isset($_POST['nom']) && isset($_POST['choix_liste'])) {
 			$nom_liste = $_POST['nom'];
 			$choix_liste = $_POST['choix_liste'];
@@ -107,7 +105,7 @@ class CtrlMembre{
 			Verif::verif_str($login);
 			
 			$modeleListeTache = new MdlListeTache();
-
+			
 			if($choix_liste == 'privee'){
 				$modeleMembre = new MdlMembre();
 				$membre = $modeleMembre->findMembreByPseudo($login);			
@@ -123,7 +121,6 @@ class CtrlMembre{
 			}
 			else{
 				$modeleListeTache->newListe($nom_liste,$idmembre);
-				
 				$liste = $modeleListeTache->findListeByNomAndMembre($nom_liste,$idmembre);
 				$id = $liste->getIdListe();
 				$taches = $modeleListeTache->findTachesByIdListe($id);
@@ -136,7 +133,5 @@ class CtrlMembre{
 			require($rep.$vues['nouvelleliste_connecte']);
 		}
 	}
-	
-	
 }
 ?>

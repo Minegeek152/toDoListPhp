@@ -10,7 +10,7 @@ class Liste{
 		$this->idMembre=$idMembre;
 	}
 
-	function __toString():string{
+	public function __toString():string{
 		return $this->nom;
 	}
 
@@ -18,15 +18,15 @@ class Liste{
 		return $this->idListe;
 	}
 
-	function getNom():string{
+	public function getNom():string{
 		return $this->nom;
 	}
 
-	function getIdMembre():int{
+	public function getIdMembre():int{
 		return $this->idMembre;
 	}
 
-	function setNom(string $nom){
+	public function setNom(string $nom){
 		$this->nom=$nom;
 	}
 

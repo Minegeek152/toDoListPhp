@@ -8,11 +8,9 @@ class ListeGateway{
 	
 	public function getAllListe() {
 		$query="SELECT * FROM Liste";
-	
 		$this->con->executeQuery($query,array());
 			
 		$results = $this->con->getResults();
-
 		foreach ($results as $row)
 			$Listes[] = new Liste($row['nom'],$row['idMembre'],$row['idListe']);
 		return $Listes;
@@ -43,11 +41,9 @@ class ListeGateway{
 		
 		$results = $this->con->getResults();
 		$Listes=NULL;
-		foreach($results as $row){
+		foreach($results as $row)
 			$Listes[] = new Liste($row['nom'],$row['idMembre'],$row['idListe']);
-		}
 		return $Listes;
-		
 	}
 	
 	public function findByNomAndMembre($nom,$id){
@@ -57,37 +53,31 @@ class ListeGateway{
 		$results = $this->con->getResults();
 		if(empty($results)) return NULL;
 		else{
-			foreach($results as $row){
+			foreach($results as $row)
 				return new Liste($row['nom'],$row['idMembre'],$row['idListe']);
-			}
 		}		
 	}
 	
 	public function newListe(Liste $list){
 		$nom=$list->getNom();
 		$idMembre=$list->getIdMembre();
-		$query="INSERT INTO Liste VALUES(NULL,:nom,:idMembre)";
-
 		
-		$this->con->executeQuery($query,array(
-			':nom' => array($nom,PDO::PARAM_STR), 
-			':idMembre' => array($idMembre,PDO::PARAM_STR)));
+		$query="INSERT INTO Liste VALUES(NULL,:nom,:idMembre)";
+		$this->con->executeQuery($query,array(':nom' => array($nom,PDO::PARAM_STR),':idMembre' => array($idMembre,PDO::PARAM_STR)));
 	}
 	
 	public function updateListeNom(Liste $list, string $nom){
-		
 		$idListe=$list->getIdListe();
+		
 		$query = "UPDATE Liste SET nom = :nom WHERE idListe = :id";
-		$this->con->executeQuery($query,array(
-			':nom'=>array($nom,PDO::PARAM_STR),
-			':id'=>array($idListe,PDO::PARAM_INT)));	
+		$this->con->executeQuery($query,array(':nom'=>array($nom,PDO::PARAM_STR),':id'=>array($idListe,PDO::PARAM_INT)));	
 	}
 	
 	public function deleteListe(Liste $list){
 		$idListe=$list->getIdListe();
+		
 		$query = "DELETE FROM Liste WHERE idListe = :id";
-		$this->con->executeQuery($query,array(
-		':id'=>array($idListe,PDO::PARAM_INT)));
+		$this->con->executeQuery($query,array(':id'=>array($idListe,PDO::PARAM_INT)));
 	}	
 }
 ?>

@@ -1,42 +1,38 @@
 <?php 
 
-class Membre
-{
+class Membre{
  	private $pseudo;
  	private $mdp;
-    private $id;
+   private $id;
 
- 	function __construct(string $pseudo,string $mdp,int $id=NULL)
- 	{
+ 	public function __construct(string $pseudo,string $mdp,int $id=NULL){
  		$this->pseudo=$pseudo;
  		$this->mdp=$mdp;
-        $this->id=$id;
+      $this->id=$id;
  	}
 
- 	function __toString(){
+ 	public function __toString(){
  		return $this->pseudo;
  	}
 
-    function getPseudo(){
-        return $this->pseudo;
-    }
+   public function getPseudo(){
+       return $this->pseudo;
+   }
 
-    function getMdp(){
-        return $this->mdp;
-    }
+   public function getMdp(){        
+   	return $this->mdp;
+  	}
+   
+   public function getId(){
+       return $this->id;
+   }
 
-    function getId(){
-        return $this->id;
-    }
+   public function setPseudo(string $pseudo){
+       $this->pseudo=$pseudo;
+   }
 
-    function setPseudo(string $pseudo){
-        $this->pseudo=$pseudo;
-    }
-
-    function setMdp(string $mdp){
-        $this->mdp=$mdp;
-    }
+   public function setMdp(string $mdp){
+       $this->mdp=$mdp;
+   }
  } 
-
-
 ?>

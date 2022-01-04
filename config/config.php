@@ -1,8 +1,5 @@
 <?php 
-
-
 $rep=__DIR__.'/../';
-
 
 $vues['accueil']='vues/accueil.php';
 $vues['erreur']='vues/erreur.php';

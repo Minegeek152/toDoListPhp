@@ -16,26 +16,27 @@ class Tache {
 		return $this->intitule;	
 	}
 
-	function getIntitule():string{
+	public function getIntitule():string{
 		return $this->intitule;
 	}
 
-	function isComplete():bool{
+	public function isComplete():bool{
 		return $this->complete;
 	}
-	function getIdTache(){
+	
+	public function getIdTache(){
 		return $this->idTache;
 	}
 
-	function getIdListe():int{
+	public function getIdListe():int{
 		return $this->idListe;
 	}
 
-	function setIntitule(string $intitule){
+	public function setIntitule(string $intitule){
 		$this->intitule=$intitule;
 	}
 
-	function toggleComplete(){
+	public function toggleComplete(){
 		$this->complete=!$this->complete;
 	}
 }
