@@ -311,6 +311,9 @@ class CtrlUtilisateur{
 			$idliste = $liste->getIdListe();
 			$modele->deleteTache($nom_tache);
 			$taches = $modele->findTachesByIdListe($idliste);
+			if(empty($taches)){
+				$message['ERR_NO_TASKS']="Il n'y a pas encore de taches";	
+			}
 			require($rep.$vues['affichageliste']);
 		}else{
 			$this->Reinit();
