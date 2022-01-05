@@ -33,28 +33,6 @@ class CtrlMembre{
 		}
 		exit(0);
 	}
-
-	function toutesLesListes($message){
-		global $rep, $vues;
-	
-		$modele = new MdlListeTache();
-		
-		$modeleMembre = new MdlMembre();
-
-		$listes = $modele->findListeByIdMembre(1);
-		$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
-		$listes = array_merge($listes,$modele->findListeByIdMembre($membre->getId()));
-		if(empty($listes)){
-			$message['ERR_NO_LISTS'] = "Il n'y a pas encore de listes";
-			require($rep.$vues['accueil']);		
-		}else{
-			foreach($listes as $row){
-				$id=$row->getIdListe();
-				$taches[] = $modele->findTachesByIdListe($id);
-			}
-			require($rep.$vues['accueil']);
-		}	
-	}
 	
 	function listesPrivees($message){
 		global $rep, $vues;

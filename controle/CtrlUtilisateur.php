@@ -60,6 +60,11 @@ class CtrlUtilisateur{
 		$modele = new MdlListeTache();
 		
 		$listes = $modele->findListeByIdMembre(1);
+		if(isset($_SESSION['role']) && isset($_SESSION['login'])){
+			$modeleMembre = new MdlMembre();
+			$membre=$modeleMembre->findMembreByPseudo($_SESSION['login']);
+			$listes = array_merge($listes,$modele->findListeByIdMembre($membre->getId()));
+		}
 		if(empty($listes)){
 			$message['ERR_NO_LISTS'] = "Il n'y a pas encore de listes";
 			require($rep.$vues['accueil']);		
