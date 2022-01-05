@@ -232,7 +232,7 @@ class CtrlUtilisateur{
 
 			if(isset($_SESSION['login'])){
 				$modeleMembre = new MdlMembre();
-				$membre = $modeleMembre->findMembreByPseudo($login);			
+				$membre = $modeleMembre->findMembreByPseudo($_SESSION['login']);			
 				$idmembre = $membre->getId();
 			}
 			else{

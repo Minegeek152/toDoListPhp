@@ -45,7 +45,7 @@ class MdlMembre{
 		return $array_membres;
 	}
 	
-	public function findMembreByPseudo($pseudo) : Membre {
+	public function findMembreByPseudo($pseudo) {
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$membreGateway = new MembreGateway($con);
@@ -54,7 +54,7 @@ class MdlMembre{
 		return $membre;
 	}
 	
-	public function findMembreById($id) : Membre {
+	public function findMembreById($id) {
 		global $dns,$user,$pass;
 		$con = new Connection($dns,$user,$pass);
 		$membreGateway = new MembreGateway($con);
